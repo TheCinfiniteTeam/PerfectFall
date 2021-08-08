@@ -5,5 +5,5 @@
 ### 状态: ![](https://img.shields.io/badge/LICENSE-InDev-red)
 ### 美术: 司南
 ### 代码: 佳杰
-### 代码: 蛋鸭
 ### 代码: 永远的天依
+### 吉祥物: 蛋鸭

@@ -7,4 +7,7 @@
 ### 代码: 佳杰
 ### 代码: 依神
 ### 吉祥物: 蛋鸭
-`pip install libs_text/last.txt`
+# How to Install
+1. Clone Repo `git clone https://github.com/TheCinfiniteTeam/PerfectFall.git`
+2. Install Libs `pip install -r requirements.txt`
+3. Run `python3 main.py`

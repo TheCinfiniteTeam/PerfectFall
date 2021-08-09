@@ -22,16 +22,23 @@ class Window():
         self.resource = Resource
 
     def init(self):
+        pygame.init()
         os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
+        self.window = pygame.display.set_mode((Game.width, Game.height))
         pygame.display.set_caption("Perfect Fall")
         pygame.display.set_icon(self.resource.icon)
         self.game.showVideo(self.resource.startVideo)
-        self.window = pygame.display.set_mode((Game.width, Game.height))
+
 
     def loop(self):
         while self.game.isExit == False:
             self.handlerEvent()
             pygame.display.update()
+
+    def renderText(self, fontName, textSize, textColor, text, position):
+        TextFont = pygame.font.Font('%s/resource/fonts/%s'%(self.game.runDir, fontName), textSize)
+        newText = TextFont.render(text, True, textColor)
+        self.window.blit(newText, position)
 
     def handlerEvent(self):
         for event in pygame.event.get():

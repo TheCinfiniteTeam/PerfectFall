@@ -1,5 +1,5 @@
 from moviepy.editor import *
-import os, time, random, pygame, wx
+import os, time, random, pygame
 
 #init
 class Game():

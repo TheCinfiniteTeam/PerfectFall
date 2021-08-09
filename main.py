@@ -43,7 +43,7 @@ with open(file="%s/resource/REP.json"%Game.runDir, encoding="utf-8") as REPFD:
     REPRAW = REPFD.read()
 
 REP = json.loads(REPRAW)
-startVideo = VideoFileClip('%s/resource/start720p.mp4' % Game.runDir)
+startVideo = VideoFileClip('%s/resource/%s.%s' % (Game.runDir, REP['video']['start_720p']['path'], REP['video']['start_720p']['name'], REP['video']['start_720p']['type']))
 startVideo.size = [1280, 720]
 
 Game.showVideo(startVideo)

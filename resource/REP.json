@@ -5,5 +5,18 @@
       "name": "コミュニケーション - Perfume",
       "type": "ogg"
     }
+  },
+  "font": {},
+  "video": {
+    "start": {
+      "path": "video",
+      "name": "start",
+      "type": "mp4"
+    },
+    "start_720p": {
+      "path": "video",
+      "name": "start720p",
+      "type": "mp4"
+    }
   }
 }

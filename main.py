@@ -1,53 +1,60 @@
+#-*-coding:UTF-8 -*-
 from moviepy.editor import VideoFileClip
-import os, time, random, pygame
+import os, time, random, pygame, json
+from pygame.locals import *
+
+pygame.init()
+pygame.mixer.init()
 
 class Game():
+    STATES = ['NO_ENTER', 'ENTER', 'PLAY', 'END']
+    STATE = STATES[0]
     width = 1280
     height = 720
-    isExit = False
     runDir = os.getcwd()
     def showVideo(video):
         video.preview()
         video.close()
 
-class Resource():
-    startVideo = VideoFileClip('%s/resource/start720p.mp4' % Game.runDir)
-    startVideo.size = [1280, 720]
+icon = pygame.image.load('%s/resource/icon.png'%Game.runDir)
 
-    icon = pygame.image.load("%s/resource/icon.png"%Game.runDir)
+os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
+window = pygame.display.set_mode((Game.width, Game.height))
+pygame.display.set_caption('Perfect Fall')
+pygame.display.set_icon(icon)
+window.fill((255, 255, 255))
 
-class Window():
-    def __init__(self):
-        self.game = Game
-        self.resource = Resource
+def renderText(fontName, textSize, textColor, text, position):
+    TextFont = pygame.font.Font('%s/resource/fonts/%s'%(Game.runDir, fontName), textSize)
+    newText = TextFont.render(text, True, textColor)
+    window.blit(newText, position)
 
-    def init(self):
-        pygame.init()
-        os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
-        self.window = pygame.display.set_mode((Game.width, Game.height))
-        pygame.display.set_caption("Perfect Fall")
-        pygame.display.set_icon(self.resource.icon)
-        self.window.fill((255, 255, 255))
-        self.game.showVideo(self.resource.startVideo)
+def handlerEvent():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if Game.STATE == Game.STATES[0]:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print('start')
+                    Game.STATE = Game.STATES[1]
 
+with open(file="%s/resource/REP.json"%Game.runDir, encoding="utf-8") as REPFD:
+    REPRAW = REPFD.read()
 
-    def loop(self):
-        while self.game.isExit == False:
-            pygame.display.update()
-            self.handlerEvent()
+REP = json.loads(REPRAW)
+startVideo = VideoFileClip('%s/resource/start720p.mp4' % Game.runDir)
+startVideo.size = [1280, 720]
 
-    def renderText(self, fontName, textSize, textColor, text, position):
-        TextFont = pygame.font.Font('%s/resource/fonts/%s'%(self.game.runDir, fontName), textSize)
-        newText = TextFont.render(text, True, textColor)
-        self.window.blit(newText, position)
+Game.showVideo(startVideo)
+pygame.mixer.music.load('%s/resource/%s/%s.%s' % (Game.runDir, REP['music']['start']['path'], REP['music']['start']['name'], REP['music']['start']['type']))
 
-    def handlerEvent(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.game.isExit = True
-                pygame.quit()
+while True:
+    if Game.STATE == Game.STATES[0]:
+        if pygame.mixer.music.get_busy() == False:
+            pygame.mixer.music.play()
+    if Game.STATE == Game.STATES[1]:
+        pygame.mixer.music.stop()
 
-if __name__ == '__main__':
-    window = Window()
-    window.init()
-    window.loop()
+    pygame.display.update()
+    handlerEvent()

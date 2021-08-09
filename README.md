@@ -7,7 +7,10 @@
 ### 代码: 佳杰
 ### 代码: 依神
 ### 吉祥物: 蛋鸭
-# How to Install
-1. Clone Repo `git clone https://github.com/TheCinfiniteTeam/PerfectFall.git`
-2. Install Libs `pip install -r requirements.txt`
-3. Run `python3 main.py`
+# 如何运行
+1. 克隆仓库 `git clone https://github.com/TheCinfiniteTeam/PerfectFall.git`
+2. 安装库 `pip install -r requirements.txt`
+3. 运行 `python3 main.py`
+# 如何生成可执行文件
+1. 执行 -如何运行的步骤确保可以打开
+2. 使用 `pyinstaller -D -w -n PerfectFall -i resource/icon.ico main.py`

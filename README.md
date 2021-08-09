@@ -7,3 +7,4 @@
 ### 代码: 佳杰
 ### 代码: 永远的天依
 ### 吉祥物: 蛋鸭
+`pip install libs_text/last.txt`

@@ -18,5 +18,12 @@
       "name": "start720p",
       "type": "mp4"
     }
+  },
+  "image": {
+    "icon": {
+      "path": "images",
+      "name": "icon",
+      "type": "png"
+    }
   }
 }

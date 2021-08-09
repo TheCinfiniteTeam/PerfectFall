@@ -5,6 +5,14 @@ from pygame.locals import *
 from resource import Resource
 
 pygame.init()
+pygame.mixer.init()
+
+resource = Resource(Game.runDir)
+
+pygame.mixer.music.load(resource.getPath('music', 'start'))
+
+startVideo = moviepy.editor.VideoFileClip(resource.getPath('video', 'start_720p'))
+startVideo.size = [1280, 720]
 
 class Game():
     STATES = ['NO_ENTER', 'ENTER', 'PLAY', 'END']
@@ -39,14 +47,10 @@ def handlerEvent():
                     print('start')
                     Game.STATE = Game.STATES[1]
 
-resource = Resource(Game.runDir)
+def start():
+    Game.showVideo(startVideo)
 
-pygame.mixer.init()
-startVideo = moviepy.editor.VideoFileClip(resource.getPath('video', 'start_720p'))
-startVideo.size = [1280, 720]
-
-Game.showVideo(startVideo)
-pygame.mixer.music.load(resource.getPath('music', 'start'))
+start()
 
 while True:
     if Game.STATE == Game.STATES[0]:

@@ -1,10 +1,10 @@
 #-*-coding:UTF-8 -*-
-from moviepy.editor import VideoFileClip
+import moviepy.editor
 import os, time, random, pygame, json
 from pygame.locals import *
+from resource import Resource
 
 pygame.init()
-pygame.mixer.init()
 
 class Game():
     STATES = ['NO_ENTER', 'ENTER', 'PLAY', 'END']
@@ -39,15 +39,14 @@ def handlerEvent():
                     print('start')
                     Game.STATE = Game.STATES[1]
 
-with open(file="%s/resource/REP.json"%Game.runDir, encoding="utf-8") as REPFD:
-    REPRAW = REPFD.read()
+resource = Resource(Game.runDir)
 
-REP = json.loads(REPRAW)
-startVideo = VideoFileClip('%s/resource/%s.%s' % (Game.runDir, REP['video']['start_720p']['path'], REP['video']['start_720p']['name'], REP['video']['start_720p']['type']))
+pygame.mixer.init()
+startVideo = moviepy.editor.VideoFileClip(resource.getPath('video', 'start_720p'))
 startVideo.size = [1280, 720]
 
 Game.showVideo(startVideo)
-pygame.mixer.music.load('%s/resource/%s/%s.%s' % (Game.runDir, REP['music']['start']['path'], REP['music']['start']['name'], REP['music']['start']['type']))
+pygame.mixer.music.load(resource.getPath('music', 'start'))
 
 while True:
     if Game.STATE == Game.STATES[0]:

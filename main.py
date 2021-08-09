@@ -18,24 +18,26 @@ class Resource():
 
 class Window():
     def __init__(self):
-        pass
+        self.game = Game
+        self.resource = Resource
+
     def init(self):
         os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
         pygame.display.set_caption("Perfect Fall")
-        pygame.display.set_icon(Resource.icon)
-        Game.showVideo(Resource.startVideo)
+        pygame.display.set_icon(self.resource.icon)
+        self.game.showVideo(self.resource.startVideo)
         self.window = pygame.display.set_mode((Game.width, Game.height))
 
     def loop(self):
-        while Game.isExit == False:
+        while self.game.isExit == False:
             self.handlerEvent()
             pygame.display.update()
 
     def handlerEvent(self):
         for event in pygame.event.get():
-            pass
-
-
+            if event.type == pygame.QUIT:
+                self.game.isExit = True
+                pygame.quit()
 
 if __name__ == '__main__':
     window = Window()

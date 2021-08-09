@@ -27,13 +27,14 @@ class Window():
         self.window = pygame.display.set_mode((Game.width, Game.height))
         pygame.display.set_caption("Perfect Fall")
         pygame.display.set_icon(self.resource.icon)
+        self.window.fill((255, 255, 255))
         self.game.showVideo(self.resource.startVideo)
 
 
     def loop(self):
         while self.game.isExit == False:
-            self.handlerEvent()
             pygame.display.update()
+            self.handlerEvent()
 
     def renderText(self, fontName, textSize, textColor, text, position):
         TextFont = pygame.font.Font('%s/resource/fonts/%s'%(self.game.runDir, fontName), textSize)

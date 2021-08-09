@@ -28,7 +28,15 @@ class Window():
 
     def loop(self):
         while Game.isExit == False:
+            self.handlerEvent()
             pygame.display.update()
+
+    def handlerEvent(self):
+        for event in pygame.event.get():
+            pass
+
+
+
 if __name__ == '__main__':
     window = Window()
     window.init()

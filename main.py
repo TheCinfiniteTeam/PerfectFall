@@ -12,6 +12,7 @@ class Game():
     STATE = STATES[0]
     width = 1280
     height = 720
+    size = width, height
     runDir = os.getcwd()
     def showVideo(video):
         video.preview()
@@ -30,14 +31,16 @@ pygame.display.set_caption('Perfect Fall')
 pygame.display.set_icon(icon)
 window.fill((255, 255, 255))
 
-testImg = pygame.image.load(resource.getPath('image', 'test'))
+class Images():
+    testImg = pygame.image.load(resource.getPath('image', 'test'))
+
+    buttonImg = pygame.image.load(resource.getPath('image', 'button'))
 
 
 
 
-
-def renderText(fontName, textSize, textColor, text, position):
-    TextFont = pygame.font.Font('%s/resource/fonts/%s'%(Game.runDir, fontName), textSize)
+def renderText(fontPath, textSize, textColor, text, position):
+    TextFont = pygame.font.Font(fontPath, textSize)
     newText = TextFont.render(text, True, textColor)
     window.blit(newText, position)
 
@@ -52,10 +55,16 @@ def handlerEvent():
                     Game.STATE = Game.STATES[1]
 
 def start():
+    global startMusicList
     Game.showVideo(startVideo)
-    pygame.mixer.music.load(resource.getPath('music', 'start'))
+    pygame.mixer.music.load(resource.getPath('music', startMusicList[random.randint(0,len(startMusicList)-1)]))
 
 gameClock = pygame.time.Clock()
+startMusicList = [
+    'start1',
+    'start2',
+    'start3',
+]
 
 start()
 
@@ -63,7 +72,11 @@ while True:
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
-        window.blit(testImg,(0,0))
+        window.blit(pygame.transform.scale(Images.testImg, Game.size), (0,0))
+        window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739,535)) #885 555
+        renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '按下空格键开始游戏', (769,579.5))
+
+
     if Game.STATE == Game.STATES[1]:
         pygame.mixer.music.stop()
     gameClock.tick(60)

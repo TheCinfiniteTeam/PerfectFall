@@ -1,12 +1,28 @@
 {
   "music": {
-    "start": {
-      "path": "music",
-      "name": "コミュニケーション - Perfume",
+    "start1": {
+      "path": "music/start",
+      "name": "start1",
+      "type": "ogg"
+    },
+    "start2": {
+      "path": "music/start",
+      "name": "start2",
+      "type": "ogg"
+    },
+    "start3": {
+      "path": "music/start",
+      "name": "start3",
       "type": "ogg"
     }
   },
-  "font": {},
+  "font": {
+    "ZKWYT": {
+      "path": "font",
+      "name": "ZhanKuWenYiTi",
+      "type": "ttf"
+    }
+  },
   "video": {
     "start": {
       "path": "video",
@@ -28,6 +44,11 @@
     "test": {
       "path": "images",
       "name": "test",
+      "type": "png"
+    },
+    "button": {
+      "path": "images/ui",
+      "name": "button",
       "type": "png"
     }
   }

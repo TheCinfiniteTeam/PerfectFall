@@ -22,3 +22,8 @@ def gradient_color(color_list, color_sum=700):
             color_map.append(now_color)
         color_index_start = color_index_end
     return color_map
+
+def rePlaceAlphaImg(window, img, pos, step):
+    for i in range(0,256,step):
+        img.set_alpha(i)
+        window.blit(img, pos)

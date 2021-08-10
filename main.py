@@ -1,6 +1,7 @@
 #-*-coding:UTF-8 -*-
 import moviepy.editor
 import os, time, random, pygame, json
+import Util
 from pygame.locals import *
 from resource import Resource
 
@@ -29,12 +30,11 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
 window = pygame.display.set_mode((Game.width, Game.height))
 pygame.display.set_caption('Perfect Fall')
 pygame.display.set_icon(icon)
-window.fill((255, 255, 255))
 
 class Images():
-    testImg = pygame.image.load(resource.getPath('image', 'test'))
+    testImg = pygame.image.load(resource.getPath('image', 'test')).convert()
 
-    buttonImg = pygame.image.load(resource.getPath('image', 'button'))
+    buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert()
 
 
 
@@ -68,7 +68,10 @@ startMusicList = [
 
 start()
 
+startImgAlpha = 255
+
 while True:
+    window.fill((255, 255, 255))
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
@@ -79,6 +82,11 @@ while True:
 
     if Game.STATE == Game.STATES[1]:
         pygame.mixer.music.stop()
+        startImgAlpha -= 3
+        Images.testImg.set_alpha(startImgAlpha)
+        window.blit(pygame.transform.scale(Images.testImg, Game.size), (0, 0))
+        #Util.rePlaceAlphaImg(window, pygame.transform.scale(Images.testImg, Game.size), (0, 0), 17)
+
     gameClock.tick(60)
     #with open(file="fpsData.txt", encoding="utf-8", mode="a+") as fpsData:
     #    fpsData.write("%d -|- %d/60fps -|- %d\n"%(time.time(), gameClock.get_fps(), gameClock.get_time()))

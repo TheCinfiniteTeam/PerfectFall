@@ -30,6 +30,12 @@ pygame.display.set_caption('Perfect Fall')
 pygame.display.set_icon(icon)
 window.fill((255, 255, 255))
 
+testImg = pygame.image.load(resource.getPath('image', 'test'))
+
+
+
+
+
 def renderText(fontName, textSize, textColor, text, position):
     TextFont = pygame.font.Font('%s/resource/fonts/%s'%(Game.runDir, fontName), textSize)
     newText = TextFont.render(text, True, textColor)
@@ -57,6 +63,7 @@ while True:
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
+        window.blit(testImg,(0,0))
     if Game.STATE == Game.STATES[1]:
         pygame.mixer.music.stop()
     gameClock.tick(60)

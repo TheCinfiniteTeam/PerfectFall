@@ -24,6 +24,11 @@
       "path": "images",
       "name": "icon",
       "type": "png"
+    },
+    "test": {
+      "path": "images",
+      "name": "test",
+      "type": "png"
     }
   }
 }

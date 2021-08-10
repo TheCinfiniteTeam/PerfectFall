@@ -22,5 +22,5 @@
 3. 运行 `python3 main.py`
 # 如何生成可执行文件
 1. 执行 -如何运行的步骤确保可以打开
-2. 使用 `pyinstaller -D -w -n PerfectFall -i resource/icon.ico main.py`
+2. 使用 `pyinstaller -D -w -n PerfectFall -i resource/icon.ico main.py -p resource.py -p Util.py --hidden-import resource --hidden-import Util`
 

@@ -1,5 +1,5 @@
 #-*-coding:UTF-8 -*-
-import moviepy.editor
+from moviepy.editor import VideoFileClip
 import os, time, random, pygame, json
 import Util
 from pygame.locals import *
@@ -9,7 +9,7 @@ pygame.init()
 pygame.mixer.init()
 
 class Game():
-    STATES = ['NO_ENTER', 'ENTER', 'PLAY', 'END']
+    STATES = ['NO_ENTER', 'ENTERING','ENTER', 'PLAY', 'END']
     STATE = STATES[0]
     width = 1280
     height = 720
@@ -21,7 +21,7 @@ class Game():
 
 resource = Resource(Game.runDir)
 
-startVideo = moviepy.editor.VideoFileClip(resource.getPath('video', 'start_720p'))
+startVideo = VideoFileClip(resource.getPath('video', 'start_720p'))
 startVideo.size = [1280, 720]
 
 icon = pygame.image.load(resource.getPath('image', 'icon'))
@@ -71,7 +71,7 @@ start()
 startImgAlpha = 255
 
 while True:
-    window.fill((255, 255, 255))
+    window.fill((0, 0, 0))
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
@@ -82,10 +82,17 @@ while True:
 
     if Game.STATE == Game.STATES[1]:
         pygame.mixer.music.stop()
-        startImgAlpha -= 3
-        Images.testImg.set_alpha(startImgAlpha)
-        window.blit(pygame.transform.scale(Images.testImg, Game.size), (0, 0))
+        if startImgAlpha >= 0:
+            startImgAlpha -= 3
+            Images.testImg.set_alpha(startImgAlpha)
+            window.blit(pygame.transform.scale(Images.testImg, Game.size), (0, 0))
         #Util.rePlaceAlphaImg(window, pygame.transform.scale(Images.testImg, Game.size), (0, 0), 17)
+        if startImgAlpha <= 0:
+            pygame.time.wait(1500)
+            Game.STATE = Game.STATES[2]
+
+    if Game.STATE == Game.STATES[2]:
+        pass
 
     gameClock.tick(60)
     #with open(file="fpsData.txt", encoding="utf-8", mode="a+") as fpsData:

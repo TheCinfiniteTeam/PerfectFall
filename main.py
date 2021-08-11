@@ -1,6 +1,6 @@
 #-*-coding:UTF-8 -*-
 from moviepy.editor import VideoFileClip
-import os, time, random, pygame, json, requests
+import os, time, random, pygame, json, requests, sys
 from pygame.locals import *
 from Util import *
 
@@ -62,7 +62,9 @@ def renderText(fontPath, textSize, textColor, text, position, alpha=255):
 def handlerEvent():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            Game.STATE = Game.STATES[4]
             pygame.quit()
+            sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -85,7 +87,7 @@ start()
 
 startImgAlpha = 255
 
-while True:
+while not Game.STATE == Game.STATES[4]:
     window.fill((0, 0, 0))
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:

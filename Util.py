@@ -1,7 +1,60 @@
 #-*-coding:UTF-8 -*-
-# 常用函数集合
+from colorama import init
+import datetime
+import json
+
+#class
+
+class Logger():
+    def __init__(self):
+        init(autoreset=True)
+        self.OKGREEN = '\033[32m'
+        self.ERRRED = '\033[31m'
+        self.WARNYELLOW = '\33[33m'
+        self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
+        self.logs = []
+
+    def info(self,t):
+        tdti = datetime.datetime.today()
+        msg_info = str("[{0}:{1}:{2}] [{3}]{4}".format(str(tdti.hour),str(tdti.minute),str(tdti.second),"INFO",t))
+        print(self.OKGREEN+ msg_info)
+        self.logs.append(msg_info)
+
+    def warn(self,t):
+        tdtw = datetime.datetime.today()
+        msg_warn = str("[{0}:{1}:{2}] [{3}]{4}".format(str(tdtw.hour), str(tdtw.minute), str(tdtw.second), "WARN", t))
+        print(self.WARNYELLOW + msg_warn)
+        self.logs.append(msg_warn)
+
+    def error(self,t):
+        tdte = datetime.datetime.today()
+        msg_error = str("[{0}:{1}:{2}] [{3}]{4}".format(str(tdte.hour), str(tdte.minute), str(tdte.second), "ERROR", t))
+        print(self.ERRRED + msg_error)
+        self.logs.append(msg_error)
+
+    def testMode(self):
+        self.info("HI my is info")
+        self.warn("HI my is warn")
+        self.error("HI my is error")
+        print("HI my is List -> %s" % self.logs)
+
+class Resource():
+    def __init__(self, runDir):
+        self.runDir = runDir
+        with open(file="%s/resource/assets.json" % self.runDir, encoding="utf-8") as assetsFD:
+            assetsRAW = assetsFD.read()
+        self.assets = json.loads(assetsRAW)
+
+    def getPath(self, type, name):
+        return '%s/resource/%s/%s.%s' % (
+            self.runDir,
+            self.assets[type][name]['path'],
+            self.assets[type][name]['name'],
+            self.assets[type][name]['type']
+        )
 
 
+#functions
 def gradient_color(color_list, color_sum=700):
     """ 给定颜色List，输出渐变色 """
     color_center_count = len(color_list)

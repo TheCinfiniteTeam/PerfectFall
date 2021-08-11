@@ -1,12 +1,22 @@
 #-*-coding:UTF-8 -*-
 from moviepy.editor import VideoFileClip
-import os, time, random, pygame, json
-import Util
+import os, time, random, pygame, json, requests
 from pygame.locals import *
-from resource import Resource
+from Util import *
 
 pygame.init()
 pygame.mixer.init()
+
+try:
+    URL = 'http://perfectfall.cinfinitestudio.xyz'
+    rp = requests.get(URL)
+    print('online Mode %s'%rp.text)
+    title = 'Perfect Fall [Online]'
+except Exception as exc:
+    print("offline Mode %s"%exc)
+    title = 'Perfect Fall [Offline]'
+
+
 
 class Game():
     STATES = ['NO_ENTER', 'ENTERING','ENTER', 'PLAY', 'END']
@@ -28,7 +38,7 @@ icon = pygame.image.load(resource.getPath('image', 'icon'))
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
 window = pygame.display.set_mode((Game.width, Game.height))
-pygame.display.set_caption('Perfect Fall')
+pygame.display.set_caption(title)
 pygame.display.set_icon(icon)
 
 class Images():

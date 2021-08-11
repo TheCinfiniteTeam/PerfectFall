@@ -1,7 +1,19 @@
 # Perfect Fall
 # 完美下落 or 完美坠落
 ## 一款下落式音游 由TheCinfiniteTeamStudio工作室开发
+
+## 人物形象(小落)
+
+![](https://raw.githubusercontent.com/TheCinfiniteTeam/PerfectFall/main/resource/images/people.png)
+
+
+
+##### --------感谢背了个包的背包!
+
+
+
 ### 开源协议: ![](https://img.shields.io/badge/LICENSE-GPLv3-green)
+
 ### 状态: ![](https://img.shields.io/badge/LICENSE-InDev-red)
 ### 美术: 司南 & 佳杰
 ### 代码: 佳杰

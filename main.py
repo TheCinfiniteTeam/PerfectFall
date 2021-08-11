@@ -33,15 +33,19 @@ pygame.display.set_icon(icon)
 
 class Images():
     testImg = pygame.image.load(resource.getPath('image', 'test')).convert()
+    startImg = pygame.image.load(resource.getPath('image', 'start')).convert_alpha()
 
-    buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert()
+    buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
+
+    peopleImg = pygame.image.load(resource.getPath('image', 'people')).convert_alpha()
 
 
 
 
-def renderText(fontPath, textSize, textColor, text, position):
+def renderText(fontPath, textSize, textColor, text, position, alpha=255):
     TextFont = pygame.font.Font(fontPath, textSize)
     newText = TextFont.render(text, True, textColor)
+    newText.set_alpha(alpha)
     window.blit(newText, position)
 
 def handlerEvent():
@@ -75,8 +79,9 @@ while True:
     if Game.STATE == Game.STATES[0]:
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
-        window.blit(pygame.transform.scale(Images.testImg, Game.size), (0,0))
+        window.blit(pygame.transform.scale(Images.startImg, Game.size), (0,0))
         window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739,535)) #885 555
+        window.blit(pygame.transform.scale(Images.peopleImg, (380, 700)), (0, 10))
         renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '按下空格键开始游戏', (769,579.5))
 
 
@@ -84,11 +89,19 @@ while True:
         pygame.mixer.music.stop()
         if startImgAlpha >= 0:
             startImgAlpha -= 3
-            Images.testImg.set_alpha(startImgAlpha)
-            window.blit(pygame.transform.scale(Images.testImg, Game.size), (0, 0))
+            Images.startImg.set_alpha(startImgAlpha)
+            Images.buttonImg.set_alpha(startImgAlpha)
+            Images.peopleImg.set_alpha(startImgAlpha)
+            window.blit(pygame.transform.scale(Images.startImg, Game.size), (0, 0))
+            window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739, 535))  # 885 555
+            window.blit(pygame.transform.scale(Images.peopleImg, (380, 700)), (0, 10))
+            renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下空格键开始游戏', (769, 579.5), startImgAlpha)
+
         #Util.rePlaceAlphaImg(window, pygame.transform.scale(Images.testImg, Game.size), (0, 0), 17)
         if startImgAlpha <= 0:
-            pygame.time.wait(1500)
+            Images.startImg.set_alpha(255)
+            Images.buttonImg.set_alpha(255)
+            Images.peopleImg.set_alpha(255)
             Game.STATE = Game.STATES[2]
 
     if Game.STATE == Game.STATES[2]:

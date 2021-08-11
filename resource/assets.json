@@ -50,6 +50,16 @@
       "path": "images/ui",
       "name": "button",
       "type": "png"
+    },
+    "start": {
+      "path": "images",
+      "name": "start",
+      "type": "png"
+    },
+    "people": {
+      "path": "images",
+      "name": "people",
+      "type": "png"
     }
   }
 }

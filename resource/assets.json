@@ -51,6 +51,11 @@
       "name": "button",
       "type": "png"
     },
+    "button2": {
+      "path": "images/ui",
+      "name": "button2",
+      "type": "png"
+    },
     "start": {
       "path": "images",
       "name": "start",

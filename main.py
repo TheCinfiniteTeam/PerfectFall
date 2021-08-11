@@ -43,6 +43,7 @@ class Images():
 
 
 def renderText(fontPath, textSize, textColor, text, position, alpha=255):
+    global window
     TextFont = pygame.font.Font(fontPath, textSize)
     newText = TextFont.render(text, True, textColor)
     newText.set_alpha(alpha)
@@ -86,7 +87,6 @@ while True:
 
 
     if Game.STATE == Game.STATES[1]:
-        pygame.mixer.music.stop()
         if startImgAlpha >= 0:
             startImgAlpha -= 3
             Images.startImg.set_alpha(startImgAlpha)
@@ -99,6 +99,7 @@ while True:
 
         #Util.rePlaceAlphaImg(window, pygame.transform.scale(Images.testImg, Game.size), (0, 0), 17)
         if startImgAlpha <= 0:
+            pygame.mixer.music.stop()
             Images.startImg.set_alpha(255)
             Images.buttonImg.set_alpha(255)
             Images.peopleImg.set_alpha(255)

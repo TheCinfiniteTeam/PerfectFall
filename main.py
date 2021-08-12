@@ -7,13 +7,17 @@ from Util import *
 pygame.init()
 pygame.mixer.init()
 
+logger = Logger()
+
 try:
     URL = 'http://perfectfall.cinfinitestudio.xyz'
     rp = requests.get(URL)
-    print('online Mode %s'%rp.text)
+    #print('online Mode %s'%rp.text)
+    logger.info('Online Mode > %s'%rp.text)
     title = 'Perfect Fall [Online]'
 except Exception as exc:
-    print("offline Mode %s"%exc)
+    #print("offline Mode %s"%exc)
+    logger.error('Offline Mode > %s'%exc)
     title = 'Perfect Fall [Offline]'
 
 
@@ -64,6 +68,9 @@ def handlerEvent():
         if event.type == pygame.QUIT:
             Game.STATE = Game.STATES[4]
             pygame.quit()
+            with open(file='logs/%d.log'%time.time(), mode='a+', encoding='utf-8') as log:
+                for logl in logger.logs:
+                    log.write(logl+'\n')
             sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:
@@ -95,7 +102,7 @@ while not Game.STATE == Game.STATES[4]:
         window.blit(pygame.transform.scale(Images.startImg, Game.size), (0,0))
         window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739,535)) #885 555
         window.blit(pygame.transform.scale(Images.peopleImg, (380, 700)), (0, 10))
-        renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '按下空格键开始游戏', (769,579.5))
+        renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '▶Enter◀', (769,579.5))
 
 
     if Game.STATE == Game.STATES[1]:

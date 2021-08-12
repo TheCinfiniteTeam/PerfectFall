@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os
+import os,uuid
 
 from colorama import init
 import datetime
@@ -88,3 +88,5 @@ def rePlaceAlphaImg(window, img, pos, step):
     for i in range(0, 256, step):
         img.set_alpha(i)
         window.blit(img, pos)
+def getUUID(name):
+    return uuid.uuid5(uuid.NAMESPACE_DNS, name)

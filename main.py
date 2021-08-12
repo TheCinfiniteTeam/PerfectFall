@@ -74,9 +74,8 @@ def handlerEvent():
             sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    print('start')
-                    Game.STATE = Game.STATES[1]
+                logger.info('Player DOWNKEY %d'%event.key)
+                Game.STATE = Game.STATES[1]
 
 def start():
     global startMusicList

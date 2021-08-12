@@ -1,4 +1,6 @@
 #-*-coding:UTF-8 -*-
+import os
+
 from colorama import init
 import datetime
 import json
@@ -53,6 +55,10 @@ class Resource():
             self.assets[type][name]['type']
         )
 
+class Config():
+    def __init__(self, runDir=os.getcwd(), configName='config.json'):
+        self.path = runDir
+        self.configName = configName
 
 #functions
 def gradient_color(color_list, color_sum=700):

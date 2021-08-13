@@ -17,20 +17,23 @@ class Logger():
         self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
         self.logs = []
 
-    def info(self, t):
+    def info(self, t, safeLevel=10):
         msg_info = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "INFO", t,threading.current_thread().name))
         print(self.OKGREEN + msg_info)
         self.logs.append(msg_info)
+        return safeLevel
 
-    def warn(self, t):
+    def warn(self, t, safeLevel=5):
         msg_warn = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "WARN", t,threading.current_thread().name))
         print(self.WARNYELLOW + msg_warn)
         self.logs.append(msg_warn)
+        return safeLevel
 
-    def error(self, t):
+    def error(self, t, safeLevel=-1):
         msg_error = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "ERROR", t,threading.current_thread().name))
         print(self.ERRRED + msg_error)
         self.logs.append(msg_error)
+        return safeLevel
 
     def testMode(self):
         self.info("HI my is info")

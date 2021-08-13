@@ -78,16 +78,10 @@ def handlerEvent():
                 Game.STATE = Game.STATES[1]
 
 def start():
-    global startMusicList
     Game.showVideo(startVideo)
-    pygame.mixer.music.load(resource.getPath('music', startMusicList[random.randint(0,len(startMusicList)-1)]))
 
 gameClock = pygame.time.Clock()
-startMusicList = [
-    'start1',
-    'start2',
-    'start3',
-]
+
 
 start()
 
@@ -96,26 +90,17 @@ startImgAlpha = 255
 while not Game.STATE == Game.STATES[4]:
     window.fill((0, 0, 0))
     if Game.STATE == Game.STATES[0]:
-        if pygame.mixer.music.get_busy() == False:
-            pygame.mixer.music.play()
         window.blit(pygame.transform.scale(Images.startImg, Game.size), (0,0))
-        window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739,535)) #885 555
-        window.blit(pygame.transform.scale(Images.peopleImg, (380, 700)), (0, 10))
-        renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '▶Enter◀', (769,579.5))
+        renderText(resource.getPath('font', 'ZKWYT'), 40, (135,206,250), '按下任意键开始游戏', (465,590))
 
 
     if Game.STATE == Game.STATES[1]:
         if startImgAlpha >= 0:
-            startImgAlpha -= 3
+            startImgAlpha -= 17
             Images.startImg.set_alpha(startImgAlpha)
-            Images.buttonImg.set_alpha(startImgAlpha)
-            Images.peopleImg.set_alpha(startImgAlpha)
             window.blit(pygame.transform.scale(Images.startImg, Game.size), (0, 0))
-            window.blit(pygame.transform.scale(Images.buttonImg, (420, 125)), (739, 535))  # 885 555
-            window.blit(pygame.transform.scale(Images.peopleImg, (380, 700)), (0, 10))
-            renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下空格键开始游戏', (769, 579.5), startImgAlpha)
+            renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下任意键开始游戏', (465, 590), startImgAlpha)
 
-        #Util.rePlaceAlphaImg(window, pygame.transform.scale(Images.testImg, Game.size), (0, 0), 17)
         if startImgAlpha <= 0:
             pygame.mixer.music.stop()
             Images.startImg.set_alpha(255)
@@ -127,7 +112,5 @@ while not Game.STATE == Game.STATES[4]:
         pass
 
     gameClock.tick(60)
-    #with open(file="fpsData.txt", encoding="utf-8", mode="a+") as fpsData:
-    #    fpsData.write("%d -|- %d/60fps -|- %d\n"%(time.time(), gameClock.get_fps(), gameClock.get_time()))
     pygame.display.update()
     handlerEvent()

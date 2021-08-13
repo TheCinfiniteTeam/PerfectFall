@@ -23,7 +23,7 @@ except Exception as exc:
 
 
 class Game():
-    STATES = ['NO_ENTER', 'ENTERING','ENTER', 'PLAY', 'END']
+    STATES = ['NO_ENTER', 'ENTERING','MENU', 'PLAY', 'END']
     STATE = STATES[0]
     width = 1280
     height = 720

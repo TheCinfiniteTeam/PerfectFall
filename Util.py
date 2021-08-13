@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os,uuid
+import os,uuid,threading
 
 from colorama import init
 import datetime
@@ -18,17 +18,17 @@ class Logger():
         self.logs = []
 
     def info(self, t):
-        msg_info = str("[{0}] [{1}]{2}".format(str(datetime.datetime.now()), "INFO", t))
+        msg_info = str("[{0}/{ thread }] [{1}]{2}".format(str(datetime.datetime.now()), "INFO", t, thread=threading.current_thread().name))
         print(self.OKGREEN + msg_info)
         self.logs.append(msg_info)
 
     def warn(self, t):
-        msg_warn = str("[{0}] [{1}]{2}".format(str(datetime.datetime.now()), "WARN", t))
+        msg_warn = str("[{0}/{ thread }] [{1}]{2}".format(str(datetime.datetime.now()), "WARN", t, thread=threading.current_thread().name))
         print(self.WARNYELLOW + msg_warn)
         self.logs.append(msg_warn)
 
     def error(self, t):
-        msg_error = str("[{0}] [{1}]{2}".format(str(datetime.datetime.now()), "ERROR", t))
+        msg_error = str("[{0}/{ thread }] [{1}]{2}".format(str(datetime.datetime.now()), "ERROR", t, thread=threading.current_thread().name))
         print(self.ERRRED + msg_error)
         self.logs.append(msg_error)
 
@@ -53,12 +53,6 @@ class Resource():
             self.assets[type][name]['name'],
             self.assets[type][name]['type']
         )
-
-
-class Config():
-    def __init__(self, runDir=os.getcwd(), configName='config.json'):
-        self.path = runDir
-        self.configName = configName
 
 
 # functions

@@ -21,6 +21,12 @@
       "path": "font",
       "name": "ZhanKuWenYiTi",
       "type": "ttf"
+    },
+    "Inter": null,
+    "Torus": {
+      "path": "font/Torus",
+      "name": "TorusRegular",
+      "type": "otf"
     }
   },
   "video": {

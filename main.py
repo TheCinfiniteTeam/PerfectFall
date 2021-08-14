@@ -8,7 +8,6 @@ pygame.init()
 pygame.mixer.init()
 
 logger = Logger()
-logger.DebugMode()
 
 playerUUID = getUUID('admin')
 logger.info('GET UUID > %s' % playerUUID)
@@ -71,6 +70,8 @@ def renderText(fontPath, textSize, textColor, text, position, alpha=255):
     newText.set_alpha(alpha)
     window.blit(newText, position)
 
+class ModLoader():pass
+class Mod():pass
 
 gameClock = pygame.time.Clock()
 

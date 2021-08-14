@@ -1,7 +1,7 @@
 # -*-coding:UTF-8 -*-
 import os, uuid, threading
 
-from colorama import init
+from colorama import init, Fore
 import datetime
 import json
 
@@ -11,9 +11,12 @@ import json
 class Logger():
     def __init__(self):
         init(autoreset=True)
-        self.OKGREEN = '\033[32m'
-        self.ERRRED = '\033[31m'
-        self.WARNYELLOW = '\33[33m'
+        #self.OKGREEN = '\033[32m'
+        self.OKGREEN = Fore.GREEN
+        #self.ERRRED = '\033[31m'
+        self.ERRRED = Fore.RED
+        #self.WARNYELLOW = '\33[33m'
+        self.WARNYELLOW = Fore.YELLOW
         self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
         self.logs = []
         self.__debugMode = False
@@ -44,7 +47,7 @@ class Logger():
 
         def wrapper(*args, **kw):
             msg = "%s() was been called." % func.__name__
-            log = "[{0}/{1}] [{2}] {3}".format(str(datetime.datetime.now()), threading.current_thread().name, "DEBUG",
+            log = Fore.CYAN="[{0}/{1}] [{2}] {3}".format(str(datetime.datetime.now()), threading.current_thread().name, "DEBUG",
                                                msg)
             print(log)
             self.logs.append(log)

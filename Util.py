@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, uuid, threading
+import os, uuid, threading, pygame
 
 from colorama import init, Fore
 import datetime
@@ -81,8 +81,24 @@ class Resource():
             )
             return path
         except KeyError:
-            self.logger.error("Can not find resource named {0}/{1}".format("type", "name"))
+            self.logger.error("Can not find resource named {0}/{1}".format(type, name))
             return ""
+
+    def getSurface(self, type, name):
+        try:
+            return pygame.image.load(self.getPath(type, name)).convert_alpha()
+        except KeyError:
+            self.logger.error("Can not find resource named {0}/{1}".format(type, name))
+            raise KeyError("Can't Find Resource To Load Surface {0}/{1}".format(type, name))
+
+class Config():
+    def __init__(self, runDir, configName='config.json'):
+        self.configPath = runDir+'/'+configName
+        with open(file=self.configPath, mode='r', encoding='utf-8') as cfd:
+            self.config = json.loads(cfd.read())
+
+    def config(self):
+        return self.config
 
 
 # functions

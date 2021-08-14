@@ -18,7 +18,7 @@ try:
     logger.info('Online Mode > %s' % rp.text)
     title = 'Perfect Fall [Online]'
 except Exception as exc:
-    logger.error('Offline Mode > %s' % exc)
+    logger.warn('Offline Mode > %s' % exc)
     title = 'Perfect Fall [Offline]'
 
 
@@ -37,30 +37,30 @@ class Game():
 
 
 resource = Resource(Game.runDir)
+conf = Config(Game.runDir)
 
 startVideo = VideoFileClip(resource.getPath('video', 'start_720p'))
 startVideo.size = [1280, 720]
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
-window = pygame.display.set_mode((Game.width, Game.height), vsync=True)
+window = pygame.display.set_mode((Game.width, Game.height), vsync=False)
+pygame.display.set_icon(resource.getSurface('image', 'icon'))
 pygame.display.set_caption(title)
-pygame.display.set_icon(pygame.image.load(resource.getPath('image', 'icon')))
 
 
 class Images():
-    testImg = pygame.image.load(resource.getPath('image', 'test')).convert()
-    filterImg = pygame.image.load(resource.getPath('image', 'filter')).convert_alpha()
-    startImg = pygame.image.load(resource.getPath('image', 'start')).convert_alpha()
-    menuBGImg = pygame.image.load(resource.getPath('image', 'menuBG')).convert_alpha()
+    testImg = resource.getSurface('image', 'test')
+    filterImg = resource.getSurface('image', 'filter')
+    startImg = resource.getSurface('image', 'start')
+    menuBGImg = resource.getSurface('image', 'menuBG')
 
-    buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
-    buttonDownImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
-
-    peopleImg = pygame.image.load(resource.getPath('image', 'people')).convert_alpha()
+    buttonImg = resource.getSurface('image', 'button')
+    buttonDownImg = resource.getSurface('image', 'button_down')
 
     musicCoverList = [
 
     ]
+
 
 
 def renderText(fontPath, textSize, textColor, text, position, alpha=255):
@@ -80,7 +80,7 @@ Game.showVideo(startVideo)
 startImgAlpha = 255
 
 while not Game.STATE == Game.STATES[4]:
-    window.fill((0, 0, 0))
+    mousePos = pygame.mouse.get_pos()
     if Game.STATE == Game.STATES[0]:
         window.blit(pygame.transform.scale(Images.startImg, Game.size), (0, 0))
         renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下任意键开始游戏', (465, 590))
@@ -109,6 +109,18 @@ while not Game.STATE == Game.STATES[4]:
         window.blit(Images.buttonImg, (500, 408))
         renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Configure', (552, 408))
 
+        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
+            window.blit(Images.buttonDownImg, (500, 248))
+            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Solo', (600, 248))
+
+        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
+            window.blit(Images.buttonDownImg, (500, 328))
+            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Multi', (600, 328))
+
+        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
+            window.blit(Images.buttonDownImg, (500, 408))
+            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Configure', (552, 408))
+
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -128,5 +140,6 @@ while not Game.STATE == Game.STATES[4]:
             if event.type == pygame.KEYDOWN:
                 logger.info('Player DOWNKEY %d' % event.key)
                 Game.STATE = Game.STATES[1]
-    gameClock.tick(60)
+
+    gameClock.tick(sys.maxsize)#帧率为无限
     pygame.display.update()

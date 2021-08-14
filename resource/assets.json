@@ -39,6 +39,10 @@
       "path": "images/ui",
       "name": "button.png"
     },
+    "button_down": {
+      "path": "images/ui",
+      "name": "button_down.png"
+    },
     "start": {
       "path": "images",
       "name": "start.png"

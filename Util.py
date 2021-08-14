@@ -97,7 +97,7 @@ class Config():
         with open(file=self.configPath, mode='r', encoding='utf-8') as cfd:
             self.config = json.loads(cfd.read())
 
-    def config(self):
+    def getConfig(self):
         return self.config
 
 

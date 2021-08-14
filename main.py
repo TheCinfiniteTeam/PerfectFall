@@ -32,7 +32,6 @@ class Game():
     size = width, height
     runDir = os.getcwd()
 
-    @logger.callingLog
     def showVideo(video):
         video.preview()
         video.close()

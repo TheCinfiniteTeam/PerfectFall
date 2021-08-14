@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os,uuid,threading
+import os, uuid, threading
 
 from colorama import init
 import datetime
@@ -16,26 +16,44 @@ class Logger():
         self.WARNYELLOW = '\33[33m'
         self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
         self.logs = []
+        self.__debugMode = False
 
     def info(self, t, safeLevel=10):
-        msg_info = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "INFO", t,threading.current_thread().name))
+        msg_info = str(
+            "[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "INFO", t, threading.current_thread().name))
         print(self.OKGREEN + msg_info)
         self.logs.append(msg_info)
         return safeLevel
 
     def warn(self, t, safeLevel=5):
-        msg_warn = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "WARN", t,threading.current_thread().name))
+        msg_warn = str(
+            "[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "WARN", t, threading.current_thread().name))
         print(self.WARNYELLOW + msg_warn)
         self.logs.append(msg_warn)
         return safeLevel
 
     def error(self, t, safeLevel=-1):
-        msg_error = str("[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "ERROR", t,threading.current_thread().name))
+        msg_error = str(
+            "[{0}/{3}] [{1}]{2}".format(str(datetime.datetime.now()), "ERROR", t, threading.current_thread().name))
         print(self.ERRRED + msg_error)
         self.logs.append(msg_error)
         return safeLevel
 
-    def testMode(self):
+    def callingLog(self, func):
+        """函数调用时，触发装饰器，仅在调试模式可用"""
+
+        def wrapper(*args, **kw):
+            msg = "%s() was been called." % func.__name__
+            log = "[{0}/{1}] [{2}] {3}".format(str(datetime.datetime.now()), "DEBUG", threading.current_thread().name,
+                                               msg)
+            print(log)
+            self.logs.append(log)
+            return func(*args, **kw)
+
+        return wrapper
+
+    def DebugMode(self):
+        self.__debugMode = True
         self.info("HI my is info")
         self.warn("HI my is warn")
         self.error("HI my is error")
@@ -48,13 +66,19 @@ class Resource():
         with open(file="%s/resource/assets.json" % self.runDir, encoding="utf-8") as assetsFD:
             assetsRAW = assetsFD.read()
         self.assets = json.loads(assetsRAW)
+        self.logger = Logger()
 
     def getPath(self, type, name):
-        return '%s/resource/%s/%s' % (
-            self.runDir,
-            self.assets[type][name]['path'],
-            self.assets[type][name]['name'],
-        )
+        try:
+            path = '%s/resource/%s/%s' % (
+                self.runDir,
+                self.assets[type][name]['path'],
+                self.assets[type][name]['name'],
+            )
+            return path
+        except KeyError:
+            self.logger.error("Can not find resource named {0}/{1}".format("type", "name"))
+            return ""
 
 
 # functions
@@ -84,5 +108,7 @@ def rePlaceAlphaImg(window, img, pos, step):
     for i in range(0, 256, step):
         img.set_alpha(i)
         window.blit(img, pos)
+
+
 def getUUID(name):
     return uuid.uuid5(uuid.NAMESPACE_DNS, name)

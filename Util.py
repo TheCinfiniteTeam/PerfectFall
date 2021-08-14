@@ -51,8 +51,10 @@ class Logger():
             print(log)
             self.logs.append(log)
             return func(*args, **kw)
-
-        return wrapper
+        if self.__debugMode:
+            return wrapper
+        else:
+            return
 
     def DebugMode(self):
         self.__debugMode = True

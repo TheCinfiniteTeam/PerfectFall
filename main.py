@@ -141,7 +141,7 @@ while not Game.STATE == Game.STATES[4]:
                 logger.info('Player DOWNKEY %d' % event.key)
                 Game.STATE = Game.STATES[1]
 
-    if conf.config()['display']['fps'] == None:
+    if conf['display']['fps'] == None:
         gameClock.tick(sys.maxsize)
     else:
         gameClock.tick(conf['display']['fps'])

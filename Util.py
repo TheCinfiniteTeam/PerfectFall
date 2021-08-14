@@ -47,7 +47,7 @@ class Logger():
 
         def wrapper(*args, **kw):
             msg = "%s() was been called." % func.__name__
-            log = Fore.CYAN="[{0}/{1}] [{2}] {3}".format(str(datetime.datetime.now()), threading.current_thread().name, "DEBUG",
+            log = Fore.CYAN+"[{0}/{1}] [{2}] {3}".format(str(datetime.datetime.now()), threading.current_thread().name, "DEBUG",
                                                msg)
             print(log)
             self.logs.append(log)

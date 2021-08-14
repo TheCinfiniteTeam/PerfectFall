@@ -52,6 +52,11 @@
       "name": "test",
       "type": "png"
     },
+    "filter": {
+      "path": "images/ui",
+      "name": "filter",
+      "type": "png"
+    },
     "button": {
       "path": "images/ui",
       "name": "button",

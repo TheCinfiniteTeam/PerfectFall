@@ -47,6 +47,7 @@ pygame.display.set_icon(pygame.image.load(resource.getPath('image', 'icon')))
 
 class Images():
     testImg = pygame.image.load(resource.getPath('image', 'test')).convert()
+    filterImg = pygame.image.load(resource.getPath('image', 'filter')).convert_alpha()
     startImg = pygame.image.load(resource.getPath('image', 'start')).convert_alpha()
 
     buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
@@ -92,6 +93,7 @@ while not Game.STATE == Game.STATES[4]:
             Game.STATE = Game.STATES[2]
 
     if Game.STATE == Game.STATES[2]:
+        window.blit(Images.filterImg, (0,0))
         window.blit(Images.buttonImg, (500, 248))
         renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Solo', (600, 248))
         window.blit(Images.buttonImg, (500, 328))
@@ -104,9 +106,15 @@ while not Game.STATE == Game.STATES[4]:
         if event.type == pygame.QUIT:
             Game.STATE = Game.STATES[4]
             pygame.quit()
-            with open(file='logs/%d.log'%time.time(), mode='a+', encoding='utf-8') as log:
-                for logLine in logger.logs:
-                    log.write(logLine+'\n')
+            if os.path.isdir('%s/logs'%Game.runDir):
+                with open(file='logs/%d.log'%time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine+'\n')
+            else:
+                os.mkdir('%s/logs'%Game.runDir)
+                with open(file='logs/%d.log'%time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine+'\n')
             sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:

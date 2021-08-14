@@ -49,13 +49,16 @@ class Images():
     testImg = pygame.image.load(resource.getPath('image', 'test')).convert()
     filterImg = pygame.image.load(resource.getPath('image', 'filter')).convert_alpha()
     startImg = pygame.image.load(resource.getPath('image', 'start')).convert_alpha()
+    menuBGImg = pygame.image.load(resource.getPath('image', 'menuBG')).convert_alpha()
 
     buttonImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
     buttonDownImg = pygame.image.load(resource.getPath('image', 'button')).convert_alpha()
 
     peopleImg = pygame.image.load(resource.getPath('image', 'people')).convert_alpha()
 
+    musicCoverList=[
 
+    ]
 
 
 def renderText(fontPath, textSize, textColor, text, position, alpha=255):
@@ -93,6 +96,7 @@ while not Game.STATE == Game.STATES[4]:
             Game.STATE = Game.STATES[2]
 
     if Game.STATE == Game.STATES[2]:
+        window.blit(pygame.transform.scale(Images.menuBGImg, Game.size), (0, 0))
         window.blit(Images.filterImg, (0,0))
         window.blit(Images.buttonImg, (500, 248))
         renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Solo', (600, 248))

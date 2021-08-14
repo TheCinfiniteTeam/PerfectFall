@@ -1,76 +1,55 @@
 {
   "music": {
-    "start1": {
-      "path": "music/start",
-      "name": "start1",
-      "type": "ogg"
-    },
-    "start2": {
-      "path": "music/start",
-      "name": "start2",
-      "type": "ogg"
-    },
-    "start3": {
-      "path": "music/start",
-      "name": "start3",
-      "type": "ogg"
-    }
   },
   "font": {
     "ZKWYT": {
       "path": "font",
-      "name": "ZhanKuWenYiTi",
-      "type": "ttf"
+      "name": "ZhanKuWenYiTi.ttf"
     },
     "Inter": null,
     "Torus": {
       "path": "font/Torus",
-      "name": "TorusRegular",
-      "type": "otf"
+      "name": "TorusRegular.otf"
     }
   },
   "video": {
     "start": {
       "path": "video",
-      "name": "start",
-      "type": "mp4"
+      "name": "start.mp4"
     },
     "start_720p": {
       "path": "video",
-      "name": "start720p",
-      "type": "mp4"
+      "name": "start720p.mp4"
     }
   },
   "image": {
     "icon": {
       "path": "images",
-      "name": "icon",
-      "type": "png"
+      "name": "icon.png"
     },
     "test": {
       "path": "images",
-      "name": "test",
-      "type": "png"
+      "name": "test.png"
     },
     "filter": {
       "path": "images/ui",
-      "name": "filter",
-      "type": "png"
+      "name": "filter.png"
     },
     "button": {
       "path": "images/ui",
-      "name": "button",
-      "type": "png"
+      "name": "button.png"
     },
     "start": {
       "path": "images",
-      "name": "start",
-      "type": "png"
+      "name": "start.png"
     },
     "people": {
       "path": "images",
-      "name": "people",
-      "type": "png"
+      "name": "people.png"
+    },
+    "menuBG": {
+      "path": "images",
+      "name": "background.png"
     }
   }
 }

@@ -50,11 +50,10 @@ class Resource():
         self.assets = json.loads(assetsRAW)
 
     def getPath(self, type, name):
-        return '%s/resource/%s/%s.%s' % (
+        return '%s/resource/%s/%s' % (
             self.runDir,
             self.assets[type][name]['path'],
             self.assets[type][name]['name'],
-            self.assets[type][name]['type']
         )
 
 

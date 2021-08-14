@@ -37,13 +37,13 @@ class Game():
 
 
 resource = Resource(Game.runDir)
-conf = Config(Game.runDir)
+conf = Config(Game.runDir).getConfig()
 
 startVideo = VideoFileClip(resource.getPath('video', 'start_720p'))
 startVideo.size = [1280, 720]
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
-window = pygame.display.set_mode((Game.width, Game.height), vsync=False)
+window = pygame.display.set_mode((Game.width, Game.height), vsync=conf['display']['vsync'])
 pygame.display.set_icon(resource.getSurface('image', 'icon'))
 pygame.display.set_caption(title)
 
@@ -141,5 +141,8 @@ while not Game.STATE == Game.STATES[4]:
                 logger.info('Player DOWNKEY %d' % event.key)
                 Game.STATE = Game.STATES[1]
 
-    gameClock.tick(sys.maxsize)#帧率为无限
+    if conf.config()['display']['fps'] == None:
+        gameClock.tick(sys.maxsize)
+    else:
+        gameClock.tick(conf['display']['fps'])
     pygame.display.update()

@@ -8,6 +8,19 @@ pygame.init()
 pygame.mixer.init()
 
 logger = Logger()
+#Handler Argv
+if '--debug' in sys.argv or '-d' in sys.argv:
+    logger.__debugMode = True
+logger.info('Debug Mode is > %s'%logger.__debugMode)
+if '--nologger' in sys.argv or '-nl' in sys.argv:
+    logger.info('Logger is Disable')
+    class NLogger():
+        def __init__(self):pass
+        def info(self):pass
+        def warn(self):pass
+        def error(self):pass
+    logger = NLogger()
+####
 
 playerUUID = getUUID('admin')
 logger.info('GET UUID > %s' % playerUUID)
@@ -96,7 +109,6 @@ while not Game.STATE == Game.STATES[4]:
             pygame.mixer.music.stop()
             Images.startImg.set_alpha(255)
             Images.buttonImg.set_alpha(255)
-            Images.peopleImg.set_alpha(255)
             Game.STATE = Game.STATES[2]
 
     if Game.STATE == Game.STATES[2]:

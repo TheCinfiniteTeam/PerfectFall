@@ -9,6 +9,7 @@ pygame.mixer.init()
 
 logger = Logger()
 #Handler Argv
+logger.info('Argv is %s'%sys.argv)
 if '--debug' in sys.argv or '-d' in sys.argv:
     logger.__debugMode = True
 logger.info('Debug Mode is > %s'%logger.__debugMode)
@@ -49,7 +50,7 @@ class Game():
         video.close()
 
 
-resource = Resource(Game.runDir)
+resource = Resource(Game.runDir, logger)
 conf = Config(Game.runDir).getConfig()
 
 startVideo = VideoFileClip(resource.getPath('video', 'start_720p'))

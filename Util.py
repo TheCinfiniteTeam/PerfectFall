@@ -65,12 +65,12 @@ class Logger():
 
 
 class Resource():
-    def __init__(self, runDir):
+    def __init__(self, runDir, logger):
         self.runDir = runDir
+        self.logger = logger
         with open(file="%s/resource/assets.json" % self.runDir, encoding="utf-8") as assetsFD:
             assetsRAW = assetsFD.read()
         self.assets = json.loads(assetsRAW)
-        self.logger = Logger()
 
     def getPath(self, type, name):
         try:

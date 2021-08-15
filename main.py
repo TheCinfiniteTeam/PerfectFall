@@ -1,6 +1,6 @@
 # -*-coding:UTF-8 -*-
 from moviepy.editor import VideoFileClip
-import os, time, random, pygame, json, requests, sys
+import os, time, random, pygame, json, requests, sys, easygui
 from pygame.locals import *
 from Util import *
 
@@ -153,6 +153,15 @@ while not Game.STATE == Game.STATES[4]:
             if event.type == pygame.KEYDOWN:
                 logger.info('Player DOWNKEY %d' % event.key)
                 Game.STATE = Game.STATES[1]
+        if Game.STATE == Game.STATES[2]:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
+                        easygui.msgbox('TODO','TODO')
+                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
+                        easygui.msgbox('TODO','TODO')
+                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
+                        easygui.msgbox('TODO','TODO')
 
     if conf['display']['fps'] == None:
         gameClock.tick(sys.maxsize)

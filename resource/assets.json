@@ -27,6 +27,10 @@
       "path": "images",
       "name": "icon.png"
     },
+    "logo": {
+      "path": "images",
+      "name": "logo.png"
+    },
     "test": {
       "path": "images",
       "name": "test.png"

@@ -19,7 +19,6 @@ class Logger():
         self.WARNYELLOW = Fore.YELLOW
         self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
         self.logs = []
-        self.__debugMode = False
 
     def info(self, t, safeLevel=10):
         msg_info = str(

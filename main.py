@@ -1,5 +1,4 @@
 # -*-coding:UTF-8 -*-
-from moviepy.editor import VideoFileClip
 import os, time, random, pygame, json, requests, sys, easygui
 from pygame.locals import *
 from Util import *
@@ -11,16 +10,7 @@ logger = Logger()
 #Handler Argv
 logger.info('Argv is %s'%sys.argv)
 if '--debug' in sys.argv or '-d' in sys.argv:
-    logger.__debugMode = True
-logger.info('Debug Mode is > %s'%logger.__debugMode)
-if '--nologger' in sys.argv or '-nl' in sys.argv:
-    logger.info('Logger is Disable')
-    class NLogger():
-        def __init__(self):pass
-        def info(self):pass
-        def warn(self):pass
-        def error(self):pass
-    logger = NLogger()
+    logger.debugMode()
 ####
 
 playerUUID = getUUID('admin')
@@ -45,22 +35,15 @@ class Game():
     size = width, height
     runDir = os.getcwd()
 
-    def showVideo(video):
-        video.preview()
-        video.close()
-
 
 resource = Resource(Game.runDir, logger)
 conf = Config(Game.runDir).getConfig()
 
-startVideo = VideoFileClip(resource.getPath('video', 'start_720p'))
-startVideo.size = [1280, 720]
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
 window = pygame.display.set_mode((Game.width, Game.height), vsync=conf['display']['vsync'])
 pygame.display.set_icon(resource.getSurface('image', 'icon'))
 pygame.display.set_caption(title)
-
 
 class Images():
     testImg = resource.getSurface('image', 'test')
@@ -71,11 +54,11 @@ class Images():
     buttonImg = resource.getSurface('image', 'button')
     buttonDownImg = resource.getSurface('image', 'button_down')
 
+    logoImg = resource.getSurface('image', 'logo')
+
     musicCoverList = [
 
     ]
-
-
 
 def renderText(fontPath, textSize, textColor, text, position, alpha=255):
     global window
@@ -89,9 +72,32 @@ class Mod():pass
 
 gameClock = pygame.time.Clock()
 
-Game.showVideo(startVideo)
 
 startImgAlpha = 255
+
+logoAlpha = 0
+while logoAlpha <= 255:
+    Images.logoImg.set_alpha(logoAlpha)
+    window.blit(pygame.transform.scale(Images.logoImg, Game.size),(0, 0))
+    logoAlpha+=5
+    # Event Handler
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            Game.STATE = Game.STATES[4]
+            pygame.quit()
+            if os.path.isdir('%s/logs' % Game.runDir):
+                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine + '\n')
+            else:
+                os.mkdir('%s/logs' % Game.runDir)
+                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine + '\n')
+            sys.exit()
+    gameClock.tick(60)
+    pygame.display.update()
+
 
 while not Game.STATE == Game.STATES[4]:
     mousePos = pygame.mouse.get_pos()

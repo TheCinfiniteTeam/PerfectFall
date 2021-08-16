@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, time, random, pygame, json, requests, sys, easygui
+import os, time, pygame, requests, sys, easygui
 from pygame.locals import *
 from Util import *
 
@@ -30,6 +30,8 @@ class Game():
     STATES = ['NO_ENTER', 'ENTERING', 'MENU', 'PLAY', 'END']
     GAMESTATES = ['LEAVE', 'IN', 'END']
     STATE = STATES[0]
+    MENUSTATES = ['NONE', 'SOLO_SELECT', 'MULTI_SELECT', 'CONFIG']
+    MENUSTATE = MENUSTATES[0]
     width = 1280
     height = 720
     size = width, height
@@ -119,26 +121,24 @@ while not Game.STATE == Game.STATES[4]:
             Game.STATE = Game.STATES[2]
 
     if Game.STATE == Game.STATES[2]:
-        window.blit(pygame.transform.scale(Images.menuBGImg, Game.size), (0, 0))
-        window.blit(Images.filterImg, (0, 0))
-        window.blit(Images.buttonImg, (500, 248))
-        renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Solo', (600, 248))
-        window.blit(Images.buttonImg, (500, 328))
-        renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Multi', (600, 328))
-        window.blit(Images.buttonImg, (500, 408))
-        renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Configure', (552, 408))
-
-        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
-            window.blit(Images.buttonDownImg, (500, 248))
-            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Solo', (600, 248))
-
-        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
-            window.blit(Images.buttonDownImg, (500, 328))
-            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Multi', (600, 328))
-
-        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
-            window.blit(Images.buttonDownImg, (500, 408))
-            renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Configure', (552, 408))
+        if Game.MENUSTATE == Game.MENUSTATES[0]:
+            window.blit(pygame.transform.scale(Images.menuBGImg, Game.size), (0, 0))
+            window.blit(Images.filterImg, (0, 0))
+            window.blit(Images.buttonImg, (500, 248))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Solo', (600, 248))
+            window.blit(Images.buttonImg, (500, 328))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Multi', (600, 328))
+            window.blit(Images.buttonImg, (500, 408))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Configure', (552, 408))
+            if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
+                window.blit(Images.buttonDownImg, (500, 248))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Solo', (600, 248))
+            if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
+                window.blit(Images.buttonDownImg, (500, 328))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Multi', (600, 328))
+            if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
+                window.blit(Images.buttonDownImg, (500, 408))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Configure', (552, 408))
 
     # Event Handler
     for event in pygame.event.get():
@@ -162,12 +162,13 @@ while not Game.STATE == Game.STATES[4]:
         if Game.STATE == Game.STATES[2]:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
-                        easygui.msgbox('TODO','TODO')
-                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
-                        easygui.msgbox('TODO','TODO')
-                    if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
-                        easygui.msgbox('TODO','TODO')
+                    if Game.MENUSTATE == Game.MENUSTATES[0]:
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
+                            Game.MENUSTATE = Game.MENUSTATES[1]
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
+                            Game.MENUSTATE = Game.MENUSTATES[2]
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
+                            Game.MENUSTATE = Game.MENUSTATES[3]
 
     if conf['display']['fps'] == None:
         gameClock.tick(sys.maxsize)

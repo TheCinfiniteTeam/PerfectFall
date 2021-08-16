@@ -51,10 +51,6 @@
       "path": "images",
       "name": "start.png"
     },
-    "people": {
-      "path": "images",
-      "name": "people.png"
-    },
     "menuBG": {
       "path": "images",
       "name": "background.png"

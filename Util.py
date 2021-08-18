@@ -102,7 +102,7 @@ class Config():
         return self.config
 
 class Lang():
-    def __init__(self, runDir, name='config.json'):
+    def __init__(self, runDir, name='lang.json'):
         self.path = runDir+'/'+name
         with open(file=self.path, mode='r', encoding='utf-8') as cfd:
             self.lang = json.loads(cfd.read())
@@ -113,9 +113,9 @@ class Lang():
         else:
             self.loc = lang
         if argv == None:
-            return self.lang[self.loc][key]
+            return self.lang[self.loc[0]][key]
         else:
-            return self.lang[self.loc][key]%argv
+            return self.lang[self.loc[0]][key]%argv
 
 # functions
 def gradient_color(color_list, color_sum=700):

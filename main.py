@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, time, pygame, requests, sys, easygui
+import os, time, pygame, requests, sys, easygui, locale
 from pygame.locals import *
 from Util import *
 
@@ -7,6 +7,7 @@ pygame.init()
 pygame.mixer.init()
 
 logger = Logger()
+logger.info('LANG -> %s'%locale.getdefaultlocale()[0])
 #Handler Argv
 logger.info('Argv is %s'%sys.argv)
 if '--debug' in sys.argv or '-d' in sys.argv:
@@ -41,7 +42,10 @@ class Game():
 resource = Resource(Game.runDir, logger)
 conf = Config(Game.runDir).getConfig()
 lang = Lang(Game.runDir)
-
+if locale.getdefaultlocale()[0] == 'zh_CN':
+    font = resource.getPath('font', 'ZKWYT')
+else:
+    font = resource.getPath('font', 'Torus')
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
 window = pygame.display.set_mode((Game.width, Game.height), vsync=conf['display']['vsync'])
 pygame.display.set_icon(resource.getSurface('image', 'icon'))
@@ -62,12 +66,13 @@ class Images():
 
     ]
 
-def renderText(fontPath, textSize, textColor, text, position, alpha=255):
+def renderText(fontPath, textSize, textColor, text, alpha=255):# position,
     global window
     TextFont = pygame.font.Font(fontPath, textSize)
     newText = TextFont.render(text, True, textColor)
     newText.set_alpha(alpha)
-    window.blit(newText, position)
+    #window.blit(newText, position)
+    return newText
 
 class ModLoader():pass
 class Mod():
@@ -109,14 +114,16 @@ while not Game.STATE == Game.STATES[4]:
     mousePos = pygame.mouse.get_pos()
     if Game.STATE == Game.STATES[0]:
         window.blit(pygame.transform.scale(Images.startImg, Game.size), (0, 0))
-        renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下任意键开始游戏', (465, 590))
+        pakfSurface = renderText(font, 40, (135, 206, 250), '按下任意键开始游戏')
+        window.blit(pakfSurface, (465, 590))
 
     if Game.STATE == Game.STATES[1]:
         if startImgAlpha >= 0:
             startImgAlpha -= 17
             Images.startImg.set_alpha(startImgAlpha)
             window.blit(pygame.transform.scale(Images.startImg, Game.size), (0, 0))
-            renderText(resource.getPath('font', 'ZKWYT'), 40, (135, 206, 250), '按下任意键开始游戏', (465, 590), startImgAlpha)
+            pakfSurface = renderText(font, 40, (135, 206, 250), '按下任意键开始游戏', startImgAlpha)
+            window.blit(pakfSurface, (465, 590))
 
         if startImgAlpha <= 0:
             pygame.mixer.music.stop()
@@ -128,21 +135,39 @@ while not Game.STATE == Game.STATES[4]:
         if Game.MENUSTATE == Game.MENUSTATES[0]:
             window.blit(pygame.transform.scale(Images.menuBGImg, Game.size), (0, 0))
             window.blit(Images.filterImg, (0, 0))
+
             window.blit(Images.buttonImg, (500, 248))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.solo')), (600, 248))
+            soloSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.solo')))
+            #window.blit(soloSurface, (600, 248))
+            window.blit(soloSurface, (Game.size[0] / 2 - soloSurface.get_size()[0] / 2, 248))
+
             window.blit(Images.buttonImg, (500, 328))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.multi')), (600, 328))
+            multiSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.multi')))
+            #window.blit(multiSurface, (600, 328))
+            window.blit(multiSurface, (Game.size[0] / 2 - multiSurface.get_size()[0] / 2, 328))
+
             window.blit(Images.buttonImg, (500, 408))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.configure')), (552, 408))
+            configureSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.configure')))
+            #window.blit(configureSurface, (552, 408))
+            window.blit(configureSurface, (Game.size[0]/2-configureSurface.get_size()[0]/2, 408))
+
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
                 window.blit(Images.buttonDownImg, (500, 248))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.solo')), (600, 248))
+                soloSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.solo')))
+                # window.blit(soloSurface, (600, 248))
+                window.blit(soloSurface, (Game.size[0] / 2 - soloSurface.get_size()[0] / 2, 248))
+
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
                 window.blit(Images.buttonDownImg, (500, 328))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.multi')), (600, 328))
+                multiSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.multi')))
+                # window.blit(multiSurface, (600, 328))
+                window.blit(multiSurface, (Game.size[0] / 2 - multiSurface.get_size()[0] / 2, 328))
+
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
                 window.blit(Images.buttonDownImg, (500, 408))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.configure')), (552, 408))
+                configureSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.configure')))
+                # window.blit(configureSurface, (552, 408))
+                window.blit(configureSurface, (Game.size[0] / 2 - configureSurface.get_size()[0] / 2, 408))
 
     # Event Handler
     for event in pygame.event.get():

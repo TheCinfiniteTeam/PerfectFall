@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, uuid, threading, pygame
+import os, uuid, threading, pygame, locale
 
 from colorama import init, Fore
 import datetime
@@ -91,14 +91,31 @@ class Resource():
             raise KeyError("Can't Find Resource To Load Surface {0}/{1}".format(type, name))
 
 class Config():
-    def __init__(self, runDir, configName='config.json'):
-        self.configPath = runDir+'/'+configName
-        with open(file=self.configPath, mode='r', encoding='utf-8') as cfd:
+    def __init__(self, runDir, name='config.json'):
+        self.path = runDir+'/'+name
+        with open(file=self.path, mode='r', encoding='utf-8') as cfd:
             self.config = json.loads(cfd.read())
+        print('Config Path > %s' % self.path)
+
 
     def getConfig(self):
         return self.config
 
+class Lang():
+    def __init__(self, runDir, name='config.json'):
+        self.path = runDir+'/'+name
+        with open(file=self.path, mode='r', encoding='utf-8') as cfd:
+            self.lang = json.loads(cfd.read())
+        print('Lang Path > %s' %self.path)
+    def key(self, key, lang = 'auto', argv=None):
+        if lang == 'auto':
+            self.loc = locale.getdefaultlocale()
+        else:
+            self.loc = lang
+        if argv == None:
+            return self.lang[self.loc][key]
+        else:
+            return self.lang[self.loc][key]%argv
 
 # functions
 def gradient_color(color_list, color_sum=700):

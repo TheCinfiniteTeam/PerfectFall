@@ -40,7 +40,7 @@ class Game():
 
 resource = Resource(Game.runDir, logger)
 conf = Config(Game.runDir).getConfig()
-
+lang = Lang(Game.runDir)
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{x},{y}'.format(x=80, y=50)
 window = pygame.display.set_mode((Game.width, Game.height), vsync=conf['display']['vsync'])
@@ -71,10 +71,10 @@ def renderText(fontPath, textSize, textColor, text, position, alpha=255):
 
 class ModLoader():pass
 class Mod():
-    def __init__(self, MOD_NAME, MOD_ID, MOD_OTHER_INFO):
-        self.MOD_NAME = MOD_NAME
-        self.MOD_ID = MOD_ID
-        self.MOD_OTHER_INFO = MOD_OTHER_INFO
+    def __init__(self):
+        self.MOD_NAME = None
+        self.MOD_ID = None
+        self.MOD_OTHER_INFO = None
 
 gameClock = pygame.time.Clock()
 
@@ -129,20 +129,20 @@ while not Game.STATE == Game.STATES[4]:
             window.blit(pygame.transform.scale(Images.menuBGImg, Game.size), (0, 0))
             window.blit(Images.filterImg, (0, 0))
             window.blit(Images.buttonImg, (500, 248))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Solo', (600, 248))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.solo')), (600, 248))
             window.blit(Images.buttonImg, (500, 328))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Multi', (600, 328))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.multi')), (600, 328))
             window.blit(Images.buttonImg, (500, 408))
-            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), 'Configure', (552, 408))
+            renderText(resource.getPath('font', 'Torus'), 40, (135, 206, 250), str(lang.key('menu.text.configure')), (552, 408))
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
                 window.blit(Images.buttonDownImg, (500, 248))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Solo', (600, 248))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.solo')), (600, 248))
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
                 window.blit(Images.buttonDownImg, (500, 328))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Multi', (600, 328))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.multi')), (600, 328))
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
                 window.blit(Images.buttonDownImg, (500, 408))
-                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), 'Configure', (552, 408))
+                renderText(resource.getPath('font', 'Torus'), 40, (175, 239, 255), str(lang.key('menu.text.configure')), (552, 408))
 
     # Event Handler
     for event in pygame.event.get():

@@ -1,6 +1,5 @@
 colorama==0.4.4
 easygui==0.98.2
-py2exe==0.10.4.0
 pygame==2.0.1
 pyinstaller==4.5.1
 requests==2.26.0

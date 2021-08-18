@@ -70,7 +70,11 @@ def renderText(fontPath, textSize, textColor, text, position, alpha=255):
     window.blit(newText, position)
 
 class ModLoader():pass
-class Mod():pass
+class Mod():
+    def __init__(self, MOD_NAME, MOD_ID, MOD_OTHER_INFO):
+        self.MOD_NAME = MOD_NAME
+        self.MOD_ID = MOD_ID
+        self.MOD_OTHER_INFO = MOD_OTHER_INFO
 
 gameClock = pygame.time.Clock()
 

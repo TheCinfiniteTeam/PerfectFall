@@ -106,6 +106,65 @@ class Mod():
         self.MOD_ID = None
         self.MOD_OTHER_INFO = None
 
+def handlerEvent():
+    global aesci
+    # Event Handler
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                if Game.MENUSTATE == Game.MENUSTATES[0]:
+                    if not aesci:
+                        aesci = True
+                        Game.STATE = Game.STATES[4]
+                        logger.info('Player Will Exit')
+                    elif aesci:
+                        aesci = False
+                        logger.info('Player No Will Exit')
+                        Game.STATE = Game.STATES[2]
+        if event.type == pygame.QUIT:
+            if os.path.isdir('%s/logs' % Game.runDir):
+                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine + '\n')
+            else:
+                os.mkdir('%s/logs' % Game.runDir)
+                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
+                    for logLine in logger.logs:
+                        log.write(logLine + '\n')
+            Game.STATE = Game.STATES[5]
+            saveCursor.close()
+            saveData.close()
+            pygame.quit()
+            sys.exit()
+        if Game.STATE == Game.STATES[0]:
+            if event.type == pygame.KEYDOWN:
+                logger.info('Player DOWNKEY %d' % event.key)
+                Game.STATE = Game.STATES[1]
+        if Game.STATE == Game.STATES[2]:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if Game.MENUSTATE == Game.MENUSTATES[0]:
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
+                            Game.MENUSTATE = Game.MENUSTATES[1]
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
+                            Game.MENUSTATE = Game.MENUSTATES[2]
+                        if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
+                            Game.MENUSTATE = Game.MENUSTATES[3]
+            """
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    if Game.MENUSTATE == Game.MENUSTATES[0]:
+                        if not aesci:
+                            aesci = True
+                            Game.STATE = Game.STATES[4]
+                            logger.info('Player Will Exit')
+                        elif aesci:
+                            aesci = False
+                            logger.info('Player No Will Exit')
+                            Game.STATE = Game.STATES[2]
+            """
+
+
 gameClock = pygame.time.Clock()
 
 
@@ -187,6 +246,8 @@ while not Game.STATE == Game.STATES[5]:
 
         window.blit(Surfaces.greenButtonImg, (Game.size[0] / 2 - Surfaces.eBackgroundImg.get_size()[0] / 2 + Surfaces.greenButtonImg.get_size()[0] / 2 - Surfaces.greenButtonImg.get_size()[0] / 2 / 2 / 2 / 2, 134))
 
+    handlerEvent()
+    """
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -229,19 +290,8 @@ while not Game.STATE == Game.STATES[5]:
                             Game.MENUSTATE = Game.MENUSTATES[2]
                         if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
                             Game.MENUSTATE = Game.MENUSTATES[3]
-            """
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    if Game.MENUSTATE == Game.MENUSTATES[0]:
-                        if not aesci:
-                            aesci = True
-                            Game.STATE = Game.STATES[4]
-                            logger.info('Player Will Exit')
-                        elif aesci:
-                            aesci = False
-                            logger.info('Player No Will Exit')
-                            Game.STATE = Game.STATES[2]
-            """
+    """
+
 
     if conf['display']['fps'] == None:
         gameClock.tick(sys.maxsize)

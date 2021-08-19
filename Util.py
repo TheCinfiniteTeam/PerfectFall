@@ -116,7 +116,7 @@ class Lang():
 
 # functions
 def gradient_color(color_list, color_sum=700):
-    """ 给定颜色List，输出渐变色 """
+    #给定颜色List，输出渐变色
     color_center_count = len(color_list)
     color_sub_count = int(color_sum / (color_center_count - 1))
     color_index_start = 0

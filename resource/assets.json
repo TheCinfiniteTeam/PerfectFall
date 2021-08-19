@@ -54,6 +54,18 @@
     "menuBG": {
       "path": "images",
       "name": "background.png"
+    },
+    "eBackground": {
+      "path": "images/ui",
+      "name": "ebackground.png"
+    },
+    "greenBtn": {
+      "path": "images/ui",
+      "name": "green.png"
+    },
+    "redBtn": {
+      "path": "images/ui",
+      "name": "red.png"
     }
   }
 }

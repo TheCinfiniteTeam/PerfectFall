@@ -1,10 +1,12 @@
 {
   "zh_CN": {
+    "menu.text.press_any_key": "按下任意键开始游戏",
     "menu.text.solo": "单人",
     "menu.text.multi": "多人",
     "menu.text.configure": "设置"
   },
   "en_US": {
+    "menu.text.press_any_key": "Press any key to start the game",
     "menu.text.solo": "Solo",
     "menu.text.multi": "Multi",
     "menu.text.configure": "Configure"

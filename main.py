@@ -10,6 +10,9 @@ pygame.mixer.init()
 NULL = None
 null = None
 
+none = None
+NONE = None
+
 true = True
 TRUE = True
 

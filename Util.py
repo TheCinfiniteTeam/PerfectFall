@@ -114,6 +114,11 @@ class Lang():
         else:
             return self.lang[self.loc[0]][key]%argv
 
+class ChatToAI():
+    def __init__(self, api="qingyunke"):
+        pass
+
+
 # functions
 def gradient_color(color_list, color_sum=700):
     #给定颜色List，输出渐变色

@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, time, pygame, requests, sys, easygui, locale
+import os, time, pygame, requests, sys, easygui, locale, sqlite3
 from pygame.locals import *
 from Util import *
 
@@ -9,13 +9,18 @@ pygame.mixer.init()
 logger = Logger()
 logger.info('LANG -> %s'%locale.getdefaultlocale()[0])
 #Handler Argv
-logger.info('Argv is %s'%sys.argv)
+logger.info('Argv is %s'%sys.argv[1:])
 if '--debug' in sys.argv or '-d' in sys.argv:
-    logger.debugMode()
+    logger.DebugMode()
 ####
 
 playerUUID = getUUID('admin')
 logger.info('GET UUID > %s' % playerUUID)
+
+saveData = sqlite3.connect('save.db')
+logger.info('Connect to archive database > %s'%saveData)
+saveCursor = saveData.cursor()
+logger.info('Create save database cursor > %s'%saveCursor)
 
 try:
     URL = 'http://perfectfall.cinfinitestudio.xyz'
@@ -94,17 +99,9 @@ while logoAlpha <= 255:
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            Game.STATE = Game.STATES[4]
+            saveData.close()
+            saveCursor.close()
             pygame.quit()
-            if os.path.isdir('%s/logs' % Game.runDir):
-                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
-                    for logLine in logger.logs:
-                        log.write(logLine + '\n')
-            else:
-                os.mkdir('%s/logs' % Game.runDir)
-                with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
-                    for logLine in logger.logs:
-                        log.write(logLine + '\n')
             sys.exit()
     gameClock.tick(60)
     pygame.display.update()
@@ -138,42 +135,34 @@ while not Game.STATE == Game.STATES[4]:
 
             window.blit(Images.buttonImg, (500, 248))
             soloSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.solo')))
-            #window.blit(soloSurface, (600, 248))
             window.blit(soloSurface, (Game.size[0] / 2 - soloSurface.get_size()[0] / 2, 258))
 
             window.blit(Images.buttonImg, (500, 328))
             multiSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.multi')))
-            #window.blit(multiSurface, (600, 328))
             window.blit(multiSurface, (Game.size[0] / 2 - multiSurface.get_size()[0] / 2, 338))
 
             window.blit(Images.buttonImg, (500, 408))
             configureSurface = renderText(font, 40, (135, 206, 250), str(lang.key('menu.text.configure')))
-            #window.blit(configureSurface, (552, 408))
             window.blit(configureSurface, (Game.size[0]/2-configureSurface.get_size()[0]/2, 418))
 
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 248 and mousePos[1] <= 312:
                 window.blit(Images.buttonDownImg, (500, 248))
                 soloSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.solo')))
-                # window.blit(soloSurface, (600, 248))
                 window.blit(soloSurface, (Game.size[0] / 2 - soloSurface.get_size()[0] / 2, 258))
 
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 328 and mousePos[1] <= 392:
                 window.blit(Images.buttonDownImg, (500, 328))
                 multiSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.multi')))
-                # window.blit(multiSurface, (600, 328))
                 window.blit(multiSurface, (Game.size[0] / 2 - multiSurface.get_size()[0] / 2, 338))
 
             if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
                 window.blit(Images.buttonDownImg, (500, 408))
                 configureSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.configure')))
-                # window.blit(configureSurface, (552, 408))
                 window.blit(configureSurface, (Game.size[0] / 2 - configureSurface.get_size()[0] / 2, 418))
 
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            Game.STATE = Game.STATES[4]
-            pygame.quit()
             if os.path.isdir('%s/logs' % Game.runDir):
                 with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
                     for logLine in logger.logs:
@@ -183,6 +172,10 @@ while not Game.STATE == Game.STATES[4]:
                 with open(file='logs/%d.log' % time.time(), mode='a+', encoding='utf-8') as log:
                     for logLine in logger.logs:
                         log.write(logLine + '\n')
+            Game.STATE = Game.STATES[4]
+            saveData.close()
+            saveCursor.close()
+            pygame.quit()
             sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:

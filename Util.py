@@ -11,11 +11,8 @@ import json
 class Logger():
     def __init__(self):
         init(autoreset=True)
-        #self.OKGREEN = '\033[32m'
         self.OKGREEN = Fore.GREEN
-        #self.ERRRED = '\033[31m'
         self.ERRRED = Fore.RED
-        #self.WARNYELLOW = '\33[33m'
         self.WARNYELLOW = Fore.YELLOW
         self.PreLog = "[{0}:{1}:{2}] [{3}]{4}"
         self.logs = []

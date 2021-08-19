@@ -2,5 +2,13 @@
   "display": {
     "fps": null,
     "vsync": true
+  },
+  "play": {
+    "key_map": {
+      "K_B1": 1,
+      "K_B2": 2,
+      "K_B3": 3,
+      "K_B4": 4
+    }
   }
 }

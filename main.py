@@ -114,16 +114,30 @@ class Note():
         pass
 
 class DecisionLine():
-    def __init__(self, y, width):
+    def __init__(self, y, width, SEPos, rgbcolor=(255,255,255), animation='centerToRightAndLeft'):
         self.y = y
         if str(width) == 'full':
             self.width = Game.size[0]
         else:
             self.width = int(width)
+        self.color = rgbcolor
+        self.start_end_pos = SEPos
+        self.animation = animation
 
-    def draw(self):
-        pass
+    def draw(self, step):
+        global window
+        if self.animation == None:
+            pygame.draw.line(window, self.color, (self.start_end_pos[0], self.y), (self.start_end_pos[1], self.y), self.width)
+        if self.animation == 'centerToRightAndLeft':
+            pos1 = self.start_end_pos[0]
+            pos2 = self.start_end_pos[1]
 
+            startPos1 = pos2/2
+            startPos2 = pos2/2
+            while not startPos1 == pos1 and not startPos2 == pos2:
+                pygame.draw.line(window, self.color, (startPos1, self.y), (startPos2, self.y), self.width)
+                startPos1 -= step
+                startPos2 += step
 #
 
 
@@ -134,8 +148,13 @@ class Mod():
         self.MOD_ID = None
         self.MOD_OTHER_INFO = None
 
+#Value
+decisionLine = DecisionLine(y=500, width=10, SEPos=(0, 1280))
+#
+
+
 def comPaint():
-    pass
+    decisionLine.draw(0.5)
 
 def comMove():
     pass
@@ -178,7 +197,7 @@ def handlerEvent():
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:
                 #logger.info('Player DOWNKEY %d' % event.key)
-                ame.STATE = Game.STATES[1]
+                Game.STATE = Game.STATES[1]
         if Game.STATE == Game.STATES[2]:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -265,6 +284,18 @@ while not Game.STATE == Game.STATES[5]:
                 window.blit(Surfaces.buttonDownImg, (500, 408))
                 configureSurface = renderText(font, 40, (175, 239, 255), str(lang.key('menu.text.configure')))
                 window.blit(configureSurface, (Game.size[0] / 2 - configureSurface.get_size()[0] / 2, 418))
+
+        if Game.MENUSTATE == Game.MENUSTATES[1]:
+            pass
+
+        if Game.MENUSTATE == Game.MENUSTATES[2]:
+            pass
+
+        if Game.MENUSTATE == Game.MENUSTATES[3]:
+            pass
+
+
+
     if Game.STATE == Game.STATES[4]:
         window.blit(Surfaces.eBackgroundImg, (Game.size[0] / 2 - Surfaces.eBackgroundImg.get_size()[0] / 2, 0))
 

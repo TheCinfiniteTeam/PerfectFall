@@ -1,0 +1,3 @@
+"F:\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\PerfectFall_Cpp.dir/objects.a
+C:\mingw-w64\mingw64\bin\ar.exe cr CMakeFiles\PerfectFall_Cpp.dir/objects.a @CMakeFiles\PerfectFall_Cpp.dir\objects1.rsp
+C:\mingw-w64\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\PerfectFall_Cpp.dir/objects.a -Wl,--no-whole-archive -o PerfectFall_Cpp.exe -Wl,--out-implib,libPerfectFall_Cpp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\PerfectFall_Cpp.dir\linklibs.rsp

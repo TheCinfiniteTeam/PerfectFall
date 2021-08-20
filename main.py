@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, time, pygame, requests, sys, easygui, locale, sqlite3
+import os, time, pygame, requests, sys, easygui, locale, sqlite3, datetime
 from pygame.locals import *
 from Util import *
 
@@ -32,6 +32,9 @@ logger.info('Argv is %s'%sys.argv[1:])
 if '--debug' in sys.argv or '-d' in sys.argv:
     logger.DebugMode()
 ####
+
+logger.info('System Font > %s'%pygame.font.get_fonts())
+logger.info('System Default Font > %s'%pygame.font.get_default_font())
 
 playerUUID = getUUID('admin')
 logger.info('GET UUID > %s' % playerUUID)
@@ -239,14 +242,15 @@ loadNum = 0
 loadStartTime = time.time()
 loadEndTime = 10
 loadCover = resource.getRandomCoverSurface()
+copyrightTextContent = 'Copyright © 2021 - %d TheCinfiniteTeamStudio'%datetime.datetime.now().year
 
 while True:
     if loadTexti == 2.5:
-        if loadTextAlpha >= 255:
+        if loadTextAlpha >= 191.25:
             loadTexts = 'Loading'
-        elif loadTextAlpha >= 170:
+        elif loadTextAlpha >= 127.5:
             loadTexts = 'Loading...'
-        elif loadTextAlpha >= 85:
+        elif loadTextAlpha >= 63.75:
             loadTexts = 'Loading..'
         elif loadTextAlpha >= 0:
             loadTexts = 'Loading.'
@@ -257,6 +261,9 @@ while True:
     logoText2 = renderText(font, 80, (255, 255, 255), 'PerfectFall')
     window.blit(logoText1,(Game.size[0] / 2 - logoText1.get_size()[0] / 2-4,100-4))
     window.blit(logoText2, (Game.size[0] / 2 - logoText2.get_size()[0] / 2, 100))
+
+    copyrightText = renderText(font, 15, (255, 255, 255), copyrightTextContent)
+    window.blit(copyrightText, (25,Game.size[1]-copyrightText.get_size()[1]-15))
 
     loadText = renderText(font, 50, (255,255,255), loadTexts, loadTextAlpha)
     window.blit(loadText, (Game.size[0]/2-loadText.get_size()[0]/2,Game.size[1]/2+loadText.get_size()[1]+200))

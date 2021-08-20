@@ -230,6 +230,9 @@ while logoAlpha <= 255:
     gameClock.tick(60)
     pygame.display.update()
 
+#Loading...
+#
+
 aesci = False
 
 while not Game.STATE == Game.STATES[5]:

@@ -1,3 +1,0 @@
-F:/Fall/PerfectFall/PerfectFall.Cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-F:/Fall/PerfectFall/PerfectFall.Cpp/cmake-build-debug/CMakeFiles/PerfectFall_Cpp.dir
-F:/Fall/PerfectFall/PerfectFall.Cpp/cmake-build-debug/CMakeFiles/edit_cache.dir

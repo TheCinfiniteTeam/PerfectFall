@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="添加判定线(已测试)">
+    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="添加load界面(intest)">
+      <change afterPath="$PROJECT_DIR$/assets/cover/Cold Green Eyes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/cover/Dear you.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +70,7 @@
       <updated>1629377191078</updated>
       <workItem from="1629377268291" duration="659000" />
       <workItem from="1629433731899" duration="1995000" />
-      <workItem from="1629442806457" duration="9734000" />
+      <workItem from="1629442806457" duration="11444000" />
     </task>
     <task id="LOCAL-00003" summary="New File">
       <created>1629433885458</created>
@@ -124,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629447384474</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="添加load界面(intest)">
+      <created>1629462270961</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1629462270961</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +161,7 @@
     <MESSAGE value="添加note 判定线 画模块 移动模块 其他模块" />
     <MESSAGE value="删除垃圾(指蛋鸭是垃圾)" />
     <MESSAGE value="添加判定线(已测试)" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加判定线(已测试)" />
+    <MESSAGE value="添加load界面(intest)" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加load界面(intest)" />
   </component>
 </project>

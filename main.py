@@ -238,6 +238,7 @@ loadTexts = 'Loading'
 loadNum = 0
 loadStartTime = time.time()
 loadEndTime = 10
+loadCover = resource.getRandomCoverSurface()
 
 while True:
     if loadTexti == 2.5:
@@ -249,8 +250,15 @@ while True:
             loadTexts = 'Loading..'
         elif loadTextAlpha >= 0:
             loadTexts = 'Loading.'
-    window.blit(pygame.transform.scale(Surfaces.testImg, Game.size), (0,0))
-    loadText = renderText(font, 50, (0,0,0), loadTexts, loadTextAlpha)
+    window.blit(pygame.transform.scale(loadCover, Game.size), (0,0))
+    window.blit(Surfaces.filterImg, (0,0))
+
+    logoText1 = renderText(font, 80, (0,255,255), 'PerfectFall')
+    logoText2 = renderText(font, 80, (255, 255, 255), 'PerfectFall')
+    window.blit(logoText1,(Game.size[0] / 2 - logoText1.get_size()[0] / 2-4,100-4))
+    window.blit(logoText2, (Game.size[0] / 2 - logoText2.get_size()[0] / 2, 100))
+
+    loadText = renderText(font, 50, (255,255,255), loadTexts, loadTextAlpha)
     window.blit(loadText, (Game.size[0]/2-loadText.get_size()[0]/2,Game.size[1]/2+loadText.get_size()[1]+200))
     loadTextAlpha+=loadTexti
     if loadTextAlpha >= 255:

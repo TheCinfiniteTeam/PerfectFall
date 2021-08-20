@@ -1,6 +1,4 @@
 {
-  "music": {
-  },
   "font": {
     "ZKWYT": {
       "path": "font",
@@ -67,5 +65,11 @@
       "path": "images/ui",
       "name": "red.png"
     }
+  },
+  "music": {
+    "cover": [
+      "Cold Green Eyes.png",
+      "Dear you.png"
+    ]
   }
 }

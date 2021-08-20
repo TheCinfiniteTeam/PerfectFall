@@ -1,4 +1,5 @@
 # -*-coding:UTF-8 -*-
+import random
 import uuid, threading, pygame, locale
 
 from colorama import init, Fore
@@ -87,13 +88,26 @@ class Resource():
             self.logger.error("Can not find resource named {0}/{1}".format(type, name))
             raise KeyError("Can't Find Resource To Load Surface {0}/{1}".format(type, name))
 
+    def getRandomCoverSurface(self):
+        rlist = self.assets['music']['cover']
+        r= random.randint(0, len(rlist) - 1)
+        name = rlist[r]
+        try:
+            path = '%s/assets/cover/%s' % (
+                self.runDir,
+                name,
+            )
+            return pygame.image.load(path).convert_alpha()
+        except KeyError:
+            self.logger.error("Can not find resource named music/cover/{1}".format(name))
+            raise KeyError("Can't Find Resource To Load Surface music/cover/{1}".format(name))
+
 class Config():
     def __init__(self, runDir, name='config.json'):
         self.path = runDir+'/'+name
         with open(file=self.path, mode='r', encoding='utf-8') as cfd:
             self.config = json.loads(cfd.read())
         print('Config Path > %s' % self.path)
-
 
     def getConfig(self):
         return self.config

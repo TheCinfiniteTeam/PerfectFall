@@ -49,8 +49,16 @@
       <option name="presentableId" value="Default" />
       <updated>1629377191078</updated>
       <workItem from="1629377268291" duration="659000" />
+      <workItem from="1629433731899" duration="797000" />
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="New File">
+      <created>1629433885458</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1629433885458</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

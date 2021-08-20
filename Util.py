@@ -64,13 +64,13 @@ class Resource():
     def __init__(self, runDir, logger):
         self.runDir = runDir
         self.logger = logger
-        with open(file="%s/resource/assets.json" % self.runDir, encoding="utf-8") as assetsFD:
+        with open(file="%s/assets/assets.json" % self.runDir, encoding="utf-8") as assetsFD:
             assetsRAW = assetsFD.read()
         self.assets = json.loads(assetsRAW)
 
     def getPath(self, type, name):
         try:
-            path = '%s/resource/%s/%s' % (
+            path = '%s/assets/%s/%s' % (
                 self.runDir,
                 self.assets[type][name]['path'],
                 self.assets[type][name]['name'],

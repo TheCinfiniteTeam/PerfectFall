@@ -102,12 +102,47 @@ def renderText(fontPath, textSize, textColor, text, alpha=255):# position,
     #window.blit(newText, position)
     return newText
 
+#Class
+
+class Note():
+    def __init__(self, pos, type='small', time=1):
+        self.x, self.y = pos
+        self.type = type
+        self.time = time
+
+    def draw(self):
+        pass
+
+class DecisionLine():
+    def __init__(self, y, width):
+        self.y = y
+        if str(width) == 'full':
+            self.width = Game.size[0]
+        else:
+            self.width = int(width)
+
+    def draw(self):
+        pass
+
+#
+
+
 class ModLoader():pass
 class Mod():
     def __init__(self):
         self.MOD_NAME = None
         self.MOD_ID = None
         self.MOD_OTHER_INFO = None
+
+def comPaint():
+    pass
+
+def comMove():
+    pass
+
+def comOther():
+    pass
+
 
 def handlerEvent():
     global aesci

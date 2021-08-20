@@ -118,6 +118,25 @@ class ChatToAI():
     def __init__(self, api="qingyunke"):
         pass
 
+configTemp = \
+    {
+        {
+        "display": {
+            "fps": None,
+            "vsync": True
+        },
+        "play": {
+            "key_map": {
+                "K_B1": 1,
+                "K_B2": 2,
+                "K_B3": 3,
+                "K_B4": 4
+            }
+        }
+    }
+}
+
+
 
 # functions
 def gradient_color(color_list, color_sum=700):

@@ -231,6 +231,44 @@ while logoAlpha <= 255:
     pygame.display.update()
 
 #Loading...
+loadTextAlpha = 0
+loadAlpha = 255
+loadTexti = 2.5
+loadTexts = 'Loading'
+loadNum = 0
+loadStartTime = time.time()
+loadEndTime = 10
+
+while True:
+    if loadTexti == 2.5:
+        if loadTextAlpha >= 255:
+            loadTexts = 'Loading'
+        elif loadTextAlpha >= 170:
+            loadTexts = 'Loading...'
+        elif loadTextAlpha >= 85:
+            loadTexts = 'Loading..'
+        elif loadTextAlpha >= 0:
+            loadTexts = 'Loading.'
+    window.blit(pygame.transform.scale(Surfaces.testImg, Game.size), (0,0))
+    loadText = renderText(font, 50, (0,0,0), loadTexts, loadTextAlpha)
+    window.blit(loadText, (Game.size[0]/2-loadText.get_size()[0]/2,Game.size[1]/2+loadText.get_size()[1]+200))
+    loadTextAlpha+=loadTexti
+    if loadTextAlpha >= 255:
+        loadTexti = -2.5
+    if loadTextAlpha <= 0:
+        loadTexti = 2.5
+    if time.time() - loadStartTime >= loadEndTime:
+        break
+    # Event Handler
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            saveCursor.close()
+            saveData.close()
+            pygame.quit()
+            sys.exit()
+    gameClock.tick(60)
+    pygame.display.update()
+    loadNum += 1
 #
 
 aesci = False

@@ -1,5 +1,5 @@
 # -*-coding:UTF-8 -*-
-import os, uuid, threading, pygame, locale
+import uuid, threading, pygame, locale
 
 from colorama import init, Fore
 import datetime

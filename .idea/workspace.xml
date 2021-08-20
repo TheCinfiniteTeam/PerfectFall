@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="New File">
+    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="更改RESOURCE为assets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/launch.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PerfectFall.Cpp/launch.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,8 @@
       <option name="presentableId" value="Default" />
       <updated>1629377191078</updated>
       <workItem from="1629377268291" duration="659000" />
-      <workItem from="1629433731899" duration="797000" />
+      <workItem from="1629433731899" duration="1995000" />
+      <workItem from="1629442806457" duration="310000" />
     </task>
     <task id="LOCAL-00003" summary="New File">
       <created>1629433885458</created>
@@ -58,7 +62,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629433885458</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更改RESOURCE为assets">
+      <created>1629434789227</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1629434789227</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,6 +89,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New File" />
-    <option name="LAST_COMMIT_MESSAGE" value="New File" />
+    <MESSAGE value="更改RESOURCE为assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改RESOURCE为assets" />
   </component>
 </project>

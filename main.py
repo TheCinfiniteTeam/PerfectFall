@@ -114,15 +114,16 @@ def handlerEvent():
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
+            logger.info('Player Keybord KEYDOWN > %d'%event.key)
             if event.key == pygame.K_ESCAPE:
                 if Game.MENUSTATE == Game.MENUSTATES[0]:
                     if not aesci:
                         aesci = True
                         Game.STATE = Game.STATES[4]
-                        logger.info('Player Will Exit')
+                        #logger.info('Player Will Exit')
                     elif aesci:
                         aesci = False
-                        logger.info('Player No Will Exit')
+                        #logger.info('Player No Will Exit')
                         Game.STATE = Game.STATES[2]
         if event.type == pygame.QUIT:
             if os.path.isdir('%s/logs' % Game.runDir):
@@ -141,8 +142,8 @@ def handlerEvent():
             sys.exit()
         if Game.STATE == Game.STATES[0]:
             if event.type == pygame.KEYDOWN:
-                logger.info('Player DOWNKEY %d' % event.key)
-                Game.STATE = Game.STATES[1]
+                #logger.info('Player DOWNKEY %d' % event.key)
+                ame.STATE = Game.STATES[1]
         if Game.STATE == Game.STATES[2]:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -153,19 +154,6 @@ def handlerEvent():
                             Game.MENUSTATE = Game.MENUSTATES[2]
                         if mousePos[0] >= 500 and mousePos[0] <= 780 and mousePos[1] >= 408 and mousePos[1] <= 472:
                             Game.MENUSTATE = Game.MENUSTATES[3]
-            """
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    if Game.MENUSTATE == Game.MENUSTATES[0]:
-                        if not aesci:
-                            aesci = True
-                            Game.STATE = Game.STATES[4]
-                            logger.info('Player Will Exit')
-                        elif aesci:
-                            aesci = False
-                            logger.info('Player No Will Exit')
-                            Game.STATE = Game.STATES[2]
-            """
 
 
 gameClock = pygame.time.Clock()

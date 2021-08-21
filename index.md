@@ -1,4 +1,4 @@
-## Welcome to play Perfect Fall
+## Welcome to Perfect Fall
 
 ![](https://shields.io/badge/LICENSE-AGPLv3.0-green?logo=appveyor&style=for-the-badge)
 <br>
@@ -6,7 +6,7 @@
 
 ### 状态: ![](https://img.shields.io/badge/LICENSE-InDev-red)
 
-#### 美术: 司南 & 佳杰
+#### 美术: 背包 & 佳杰
 
 #### 代码: 佳杰
 

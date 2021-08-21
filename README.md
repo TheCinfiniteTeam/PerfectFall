@@ -15,7 +15,7 @@
 ### 开源协议: ![](https://img.shields.io/badge/LICENSE-GPLv3-green)
 
 ### 状态: ![](https://img.shields.io/badge/LICENSE-InDev-red)
-### 美术: 司南 & 佳杰
+### 美术: 背包 & 佳杰
 ### 代码: 佳杰
 ### 代码: 依神
 ### 吉祥物: 蛋鸭

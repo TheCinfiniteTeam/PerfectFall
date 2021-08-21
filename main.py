@@ -1,5 +1,6 @@
 # -*-coding:UTF-8 -*-
-import os, time, pygame, requests, sys, easygui, locale, sqlite3, datetime
+import os, time, pygame, requests, sys, easygui, locale, sqlite3, datetime, cv2, tempfile, shutil, hashlib
+import numpy as np
 from pygame.locals import *
 from Util import *
 
@@ -26,6 +27,18 @@ ZERO = 0
 
 
 logger = Logger()
+logger.info('File > %s'%__file__)
+tempPath = tempfile.gettempdir()
+logger.info('Temp Path > %s'%tempPath)
+tempSavePath = '%s/%s'%(tempPath, getUUID(str(int(time.time()))))
+logger.info('Temp File Dir > %s'%tempSavePath)
+try:
+    os.mkdir(tempSavePath)
+    logger.info('Gen Temp Dir Done')
+except exc as Exception:
+    logger.error('Gen Temp Dir Error > %s'%exc)
+    sys.exit()
+
 logger.info('LANG -> %s'%locale.getdefaultlocale()[0])
 #Handler Argv
 logger.info('Argv is %s'%sys.argv[1:])
@@ -193,6 +206,7 @@ def handlerEvent():
                     for logLine in logger.logs:
                         log.write(logLine + '\n')
             Game.STATE = Game.STATES[5]
+            shutil.rmtree(tempSavePath + '/')
             saveCursor.close()
             saveData.close()
             pygame.quit()
@@ -226,6 +240,7 @@ while logoAlpha <= 255:
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            shutil.rmtree(tempSavePath + '/')
             saveCursor.close()
             saveData.close()
             pygame.quit()
@@ -241,7 +256,17 @@ loadTexts = 'Loading'
 loadNum = 0
 loadStartTime = time.time()
 loadEndTime = 10
-loadCover = resource.getRandomCoverSurface()
+#loadCover = resource.getRandomCoverSurface()
+loadCoverPath = resource.getRandomCoverPath()
+with open(file=loadCoverPath,mode='rb') as loadCoverBinaryFileData:
+    loadCoverBinary = loadCoverBinaryFileData.read()
+loadCoverBinarySHA1 = hashlib.sha1(loadCoverBinary).hexdigest()
+loadCoverCV2 = cv2.imread(loadCoverPath)
+loadCoverCV2GBlur = cv2.GaussianBlur(loadCoverCV2, (27, 27), 0)
+loadCoverTempPath = '%s/%s.png'%(tempSavePath, loadCoverBinarySHA1)
+cv2.imwrite(loadCoverTempPath, loadCoverCV2GBlur)
+loadCover = pygame.image.load(loadCoverTempPath)
+
 copyrightTextContent = 'Copyright © 2021 - %d TheCinfiniteTeamStudio'%datetime.datetime.now().year
 
 while True:
@@ -277,6 +302,7 @@ while True:
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            shutil.rmtree(tempSavePath + '/')
             saveCursor.close()
             saveData.close()
             pygame.quit()

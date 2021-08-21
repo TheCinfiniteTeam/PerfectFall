@@ -102,6 +102,20 @@ class Resource():
             self.logger.error("Can not find resource named music/cover/{1}".format(name))
             raise KeyError("Can't Find Resource To Load Surface music/cover/{1}".format(name))
 
+    def getRandomCoverPath(self):
+        rlist = self.assets['music']['cover']
+        r= random.randint(0, len(rlist) - 1)
+        name = rlist[r]
+        try:
+            path = '%s/assets/cover/%s' % (
+                self.runDir,
+                name,
+            )
+            return path
+        except KeyError:
+            self.logger.error("Can not find resource named music/cover/{1}".format(name))
+            raise KeyError("Can't Find Resource To Load Surface music/cover/{1}".format(name))
+
 class Config():
     def __init__(self, runDir, name='config.json'):
         self.path = runDir+'/'+name

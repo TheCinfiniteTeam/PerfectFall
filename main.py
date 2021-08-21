@@ -215,6 +215,9 @@ def handlerEvent():
             if event.type == pygame.KEYDOWN:
                 #logger.info('Player DOWNKEY %d' % event.key)
                 Game.STATE = Game.STATES[1]
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    Game.STATE = Game.STATES[1]
         if Game.STATE == Game.STATES[2]:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -266,8 +269,10 @@ loadCoverCV2GBlur = cv2.GaussianBlur(loadCoverCV2, (27, 27), 0)
 loadCoverTempPath = '%s/%s.png'%(tempSavePath, loadCoverBinarySHA1)
 cv2.imwrite(loadCoverTempPath, loadCoverCV2GBlur)
 loadCover = pygame.image.load(loadCoverTempPath)
-
-copyrightTextContent = 'Copyright © 2021 - %d TheCinfiniteTeamStudio'%datetime.datetime.now().year
+if datetime.datetime.now().year == 2021:
+    copyrightTextContent = 'Copyright © 2021 TheCinfiniteTeamStudio'
+else:
+    copyrightTextContent = 'Copyright © 2021 - %d TheCinfiniteTeamStudio'%datetime.datetime.now().year
 
 while True:
     if loadTexti == 2.5:

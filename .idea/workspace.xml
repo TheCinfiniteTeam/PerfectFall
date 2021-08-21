@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="修改README.md">
-      <change afterPath="$PROJECT_DIR$/build.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="添加构建脚本,添加左键进入游戏" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +109,7 @@
       <workItem from="1629433731899" duration="1995000" />
       <workItem from="1629442806457" duration="16535000" />
       <workItem from="1629517140267" duration="3919000" />
-      <workItem from="1629521875383" duration="2721000" />
+      <workItem from="1629521875383" duration="3532000" />
     </task>
     <task id="LOCAL-00003" summary="New File">
       <created>1629433885458</created>
@@ -213,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629524192590</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="添加构建脚本,添加左键进入游戏">
+      <created>1629524831792</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1629524831792</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +248,7 @@
     <MESSAGE value="添加模糊效果" />
     <MESSAGE value="添加logo.txt" />
     <MESSAGE value="修改README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改README.md" />
+    <MESSAGE value="添加构建脚本,添加左键进入游戏" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加构建脚本,添加左键进入游戏" />
   </component>
 </project>

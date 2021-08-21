@@ -2,6 +2,7 @@
 
 <div>
     <button href="https://github.com/TheCinfiniteTeam/PerfectFall/releases" style="border-radius: 10px;">Download Last</button>
+    <button href="https://github.com/TheCinfiniteTeam/PerfectFall/archive/refs/heads/main.zip" style="border-radius: 10px;">Download Code</button>
 </div>
 ![](https://shields.io/badge/LICENSE-AGPLv3.0-green?logo=appveyor&style=for-the-badge)
 <br>

@@ -7,25 +7,6 @@ from Util import *
 pygame.init()
 pygame.mixer.init()
 
-#定义常用语法
-NULL = None
-null = None
-
-none = None
-NONE = None
-
-true = True
-TRUE = True
-
-false = False
-FALSE = False
-
-zero = 0
-Zero = 0
-ZERO = 0
-#
-
-
 logger = Logger()
 logger.info('File > %s'%__file__)
 tempPath = tempfile.gettempdir()
@@ -156,13 +137,22 @@ class DecisionLine():
                 startPos2 += step
 #
 
+class AntiCheat():
+    pass
+
+class AntiChat():
+    pass
 
 class ModLoader():pass
 class Mod():
     def __init__(self):
-        self.MOD_NAME = None
-        self.MOD_ID = None
-        self.MOD_OTHER_INFO = None
+        self.MOD_NAME = 'None'
+        self.MOD_ID = 'none'
+        self.MOD_OTHER_INFO = {
+            'author': 'TheCinfiniteTeamStudio',
+            'description': 'No...',
+            'version': '0.0'
+        }
 
 #Value
 decisionLine = DecisionLine(y=500, width=10, SEPos=(0, 1280))
@@ -260,6 +250,7 @@ loadNum = 0
 loadStartTime = time.time()
 loadEndTime = 10
 #loadCover = resource.getRandomCoverSurface()
+"""
 loadCoverPath = resource.getRandomCoverPath()
 with open(file=loadCoverPath,mode='rb') as loadCoverBinaryFileData:
     loadCoverBinary = loadCoverBinaryFileData.read()
@@ -269,6 +260,21 @@ loadCoverCV2GBlur = cv2.GaussianBlur(loadCoverCV2, (27, 27), 0)
 loadCoverTempPath = '%s/%s.png'%(tempSavePath, loadCoverBinarySHA1)
 cv2.imwrite(loadCoverTempPath, loadCoverCV2GBlur)
 loadCover = pygame.image.load(loadCoverTempPath)
+"""
+
+loadImageRequests = requests.get(conf['display']['backgroundAPI'][0])
+loadImageRequestsResult = loadImageRequests.content
+loadImageBinarySHA1 = hashlib.sha1(loadImageRequestsResult).hexdigest()
+loadImageTempPath = '%s/%s.png'%(tempSavePath, loadImageBinarySHA1)
+with open(file='%s/%s_raw.png'%(tempSavePath, loadImageBinarySHA1),mode='wb+') as loadImageBinaryFileDataRAW:
+    loadImageBinaryFileDataRAW.write(loadImageRequestsResult)
+with open(file=loadImageTempPath,mode='wb+') as loadImageBinaryFileData:
+    loadImageBinaryFileData.write(loadImageRequestsResult)
+loadImageCV2 = cv2.imread(loadImageTempPath)
+loadImageCV2GBlur = cv2.GaussianBlur(loadImageCV2, (27, 27), 0)
+cv2.imwrite(loadImageTempPath, loadImageCV2GBlur)
+loadCover = pygame.image.load(loadImageTempPath)
+
 if datetime.datetime.now().year == 2021:
     copyrightTextContent = 'Copyright © 2021 TheCinfiniteTeamStudio'
 else:
@@ -287,7 +293,7 @@ while True:
     window.blit(pygame.transform.scale(loadCover, Game.size), (0,0))
     window.blit(Surfaces.filterImg, (0,0))
 
-    logoText1 = renderText(font, 80, (0,255,255), 'PerfectFall')
+    logoText1 = renderText(font, 80, (87,250,255), 'PerfectFall')
     logoText2 = renderText(font, 80, (255, 255, 255), 'PerfectFall')
     window.blit(logoText1,(Game.size[0] / 2 - logoText1.get_size()[0] / 2-4,100-4))
     window.blit(logoText2, (Game.size[0] / 2 - logoText2.get_size()[0] / 2, 100))
@@ -319,6 +325,16 @@ while True:
 
 aesci = False
 
+#LoadBG
+MenuBGImageRequests = requests.get(conf['display']['backgroundAPI'][0])
+MenuBGImageRequestsResult = MenuBGImageRequests.content
+MenuBGImageBinarySHA1 = hashlib.sha1(MenuBGImageRequestsResult).hexdigest()
+MenuBGImageTempPath = '%s/%s.png' % (tempSavePath, MenuBGImageBinarySHA1)
+with open(file=MenuBGImageTempPath, mode='wb+') as MenuBGImageBinaryFileData:
+    MenuBGImageBinaryFileData.write(MenuBGImageRequestsResult)
+MenuBGCover = pygame.image.load(MenuBGImageTempPath)
+
+#LOOP
 while not Game.STATE == Game.STATES[5]:
     mousePos = pygame.mouse.get_pos()
     if Game.STATE == Game.STATES[0]:
@@ -342,7 +358,8 @@ while not Game.STATE == Game.STATES[5]:
 
     if Game.STATE == Game.STATES[2]:
         if Game.MENUSTATE == Game.MENUSTATES[0]:
-            window.blit(pygame.transform.scale(Surfaces.menuBGImg, Game.size), (0, 0))
+            #window.blit(pygame.transform.scale(Surfaces.menuBGImg, Game.size), (0, 0))
+            window.blit(pygame.transform.scale(MenuBGCover, Game.size), (0,0))
             window.blit(Surfaces.filterImg, (0, 0))
 
             window.blit(Surfaces.buttonImg, (500, 248))

@@ -1,6 +1,7 @@
 # -*-coding:UTF-8 -*-
 import random
-import uuid, threading, pygame, locale
+import uuid, threading, pygame, locale, time, copy
+import numpy as np
 
 from colorama import init, Fore
 import datetime
@@ -178,3 +179,37 @@ def rePlaceAlphaImg(window, img, pos, step):
 
 def getUUID(name):
     return uuid.uuid5(uuid.NAMESPACE_DNS, name)
+
+def getSeed(name='salt'):
+    np.random.seed(int(time.time()))
+    random.seed()
+    asc = ''
+    nl = list(name)
+    for i in nl:
+        asc+=str(ord(str(i)))
+    ascRaw = copy.copy(asc)
+    asc+=str(int(time.time()))
+    #int(asc)
+    #1
+    random.seed(int(time.time()))
+    asc+=str(random.randint(0, len(asc)))
+    #2
+    random.seed(int(time.time()))
+    asc += str(random.randint(0, len(asc)))
+    #3
+    random.seed(int(time.time()))
+    asc += str(random.randint(0, len(asc)))
+    #4
+    random.seed(int(time.time()))
+    asc += str(random.randint(0, len(asc)))
+
+    asc = list(str(asc))
+    random.seed(time.time())
+    for i in range(0, random.randint(1, len(asc))):
+        asc.append(str(i))
+        np.random.shuffle(asc)
+    ascr = ''
+    for i in asc:
+        ascr+=i
+    random.seed()
+    return int(ascr)

@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="添加构建脚本,添加左键进入游戏" />
+    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="workspace Update">
+      <change afterPath="$PROJECT_DIR$/test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,6 +48,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -109,7 +123,9 @@
       <workItem from="1629433731899" duration="1995000" />
       <workItem from="1629442806457" duration="16535000" />
       <workItem from="1629517140267" duration="3919000" />
-      <workItem from="1629521875383" duration="3532000" />
+      <workItem from="1629521875383" duration="3939000" />
+      <workItem from="1629530348872" duration="9588000" />
+      <workItem from="1629549208473" duration="1179000" />
     </task>
     <task id="LOCAL-00003" summary="New File">
       <created>1629433885458</created>
@@ -216,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629524831792</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="workspace Update">
+      <created>1629525736081</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1629525736082</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +272,7 @@
     <MESSAGE value="添加logo.txt" />
     <MESSAGE value="修改README.md" />
     <MESSAGE value="添加构建脚本,添加左键进入游戏" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加构建脚本,添加左键进入游戏" />
+    <MESSAGE value="workspace Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace Update" />
   </component>
 </project>

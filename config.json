@@ -1,7 +1,11 @@
 {
   "display": {
     "fps": null,
-    "vsync": true
+    "vsync": true,
+    "backgroundAPI": [
+      "https://papi.yfast.net/",
+      "https://www.yingciyuan.cn/pc.php"
+    ]
   },
   "play": {
     "key_map": {

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="Fix Bug">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PerfectFall.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PerfectFall.iml" afterDir="false" />
+    <list default="true" id="972dee63-8461-450c-80ed-62e3ab3780dd" name="更改" comment="添加logo.txt">
+      <change afterPath="$PROJECT_DIR$/PerfectFall.Cpp/logo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <workItem from="1629433731899" duration="1995000" />
       <workItem from="1629442806457" duration="16535000" />
       <workItem from="1629517140267" duration="3919000" />
-      <workItem from="1629521875383" duration="841000" />
+      <workItem from="1629521875383" duration="2171000" />
     </task>
     <task id="LOCAL-00003" summary="New File">
       <created>1629433885458</created>
@@ -194,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629470486878</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="添加模糊效果">
+      <created>1629522795449</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1629522795449</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +227,8 @@
     <MESSAGE value="添加load界面(intest)" />
     <MESSAGE value="load界面(rc1)" />
     <MESSAGE value="Fix Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Bug" />
+    <MESSAGE value="添加模糊效果" />
+    <MESSAGE value="添加logo.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加logo.txt" />
   </component>
 </project>
